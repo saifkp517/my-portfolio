@@ -7,11 +7,13 @@ const architecture = [
     part: 'WebSockets',
     role: 'Live position sync and hit detection — every shot and movement travels in real time.',
     href: 'https://app.notion.com/p/WebSockets-in-Zentra-Live-Movement-and-Hit-Detection-3e96a4af6be5815e80c3f8abf8c13594',
+    icon: '/images/websockets-logo.svg',
   },
   {
     part: 'Redis',
     role: 'Holds fast-changing game state, built to keep up as positions update constantly.',
     href: 'https://app.notion.com/p/Redis-in-Zentra-Storing-Fast-Changing-Game-State-3e96a4af6be5817bbc93ff4edbad2716',
+    icon: '/images/redis-logo.png',
   },
   {
     part: 'PostgreSQL',
@@ -106,7 +108,12 @@ export default function Zentra() {
             {architecture.map((item, i) => {
               const content = (
                 <>
-                  <p className="font-mono text-sm font-semibold text-accent-400">{item.part}</p>
+                  <div className="flex items-center gap-2">
+                    {item.icon && (
+                      <img src={item.icon} alt="" className="h-5 w-5 shrink-0 rounded" />
+                    )}
+                    <p className="font-mono text-sm font-semibold text-accent-400">{item.part}</p>
+                  </div>
                   <p className="mt-2 text-xs leading-relaxed text-white/60">{item.role}</p>
                   {!item.href && (
                     <p className="mt-2 font-mono text-[11px] text-white/35">
