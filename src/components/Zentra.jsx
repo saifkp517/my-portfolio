@@ -1,29 +1,8 @@
+import { Link } from 'react-router-dom'
 import Chip from './Chip.jsx'
 import CTAButton from './CTAButton.jsx'
 import Reveal from './Reveal.jsx'
-
-const architecture = [
-  {
-    part: 'WebSockets',
-    role: 'Live position sync and hit detection — every shot and movement travels in real time.',
-    href: 'https://app.notion.com/p/WebSockets-in-Zentra-Live-Movement-and-Hit-Detection-3e96a4af6be5815e80c3f8abf8c13594',
-    icon: '/images/websockets-logo.svg',
-  },
-  {
-    part: 'Redis',
-    role: 'Holds fast-changing game state, built to keep up as positions update constantly.',
-    href: 'https://app.notion.com/p/Redis-in-Zentra-Storing-Fast-Changing-Game-State-3e96a4af6be5817bbc93ff4edbad2716',
-    icon: '/images/redis-logo.png',
-  },
-  {
-    part: 'PostgreSQL',
-    role: 'Persists accounts and scores — the durable layer behind an otherwise fast-moving game.',
-  },
-  {
-    part: 'NestJS',
-    role: 'The backend that ties the above together into one coherent server.',
-  },
-]
+import { stackItems } from '../data/stack.js'
 
 const deepDives = [
   {
@@ -105,7 +84,7 @@ export default function Zentra() {
             </h3>
           </Reveal>
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {architecture.map((item, i) => {
+            {stackItems.map((item, i) => {
               const content = (
                 <>
                   <div className="flex items-center gap-2">
@@ -115,7 +94,7 @@ export default function Zentra() {
                     <p className="font-mono text-sm font-semibold text-accent-400">{item.part}</p>
                   </div>
                   <p className="mt-2 text-xs leading-relaxed text-white/60">{item.role}</p>
-                  {!item.href && (
+                  {!item.to && (
                     <p className="mt-2 font-mono text-[11px] text-white/35">
                       Article yet to be published
                     </p>
@@ -124,16 +103,14 @@ export default function Zentra() {
               )
 
               return (
-                <Reveal key={item.part} delay={i * 70}>
-                  {item.href ? (
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                <Reveal key={item.key} delay={i * 70}>
+                  {item.to ? (
+                    <Link
+                      to={item.to}
                       className="block h-full rounded-xl border border-line bg-panel p-5 transition-colors hover:border-accent-500/30"
                     >
                       {content}
-                    </a>
+                    </Link>
                   ) : (
                     <div className="h-full rounded-xl border border-line bg-panel p-5 transition-colors hover:border-accent-500/30">
                       {content}
