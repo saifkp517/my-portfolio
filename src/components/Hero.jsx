@@ -1,14 +1,22 @@
+import { useRef } from 'react'
 import Chip from './Chip.jsx'
 import CTAButton from './CTAButton.jsx'
 import Reveal from './Reveal.jsx'
 import SocialLinks from './SocialLinks.jsx'
 import GithubActivity from './GithubActivity.jsx'
+import CursorGlow from './CursorGlow.jsx'
 
 const stack = ['TypeScript', 'NestJS', 'Next.js', 'PostgreSQL', 'Redis', 'WebSockets', 'TypeORM', 'Supabase']
 
 export default function Hero() {
+  const sectionRef = useRef(null)
+
   return (
-    <section id="top" className="relative overflow-hidden pb-16 pt-32 sm:pb-20 sm:pt-40">
+    <section
+      id="top"
+      ref={sectionRef}
+      className="relative overflow-hidden pb-16 pt-32 sm:pb-20 sm:pt-40"
+    >
       {/* grid texture */}
       <div
         aria-hidden="true"
@@ -19,10 +27,7 @@ export default function Hero() {
           backgroundSize: '44px 44px',
         }}
       />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -left-40 top-10 h-[28rem] w-[28rem] rounded-full bg-accent-500/15 blur-[130px]"
-      />
+      <CursorGlow containerRef={sectionRef} />
 
       <div className="relative mx-auto max-w-content px-5 sm:px-8">
         <Reveal className="flex items-center gap-4">
