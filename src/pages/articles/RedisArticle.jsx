@@ -1,5 +1,8 @@
 import ArticleLayout from '../../components/articles/ArticleLayout.jsx'
 import { H2, P, UL, LI, Strong, InlineCode, Callout, CodeBlock } from '../../components/articles/Prose.jsx'
+import { stackItems } from '../../data/stack.js'
+
+const meta = stackItems.find((item) => item.key === 'redis')
 
 const sections = [
   { id: 'why-not-postgres', label: 'Why not just Postgres?' },
@@ -16,12 +19,13 @@ export default function RedisArticle() {
   return (
     <ArticleLayout
       stackKey="redis"
-      title="The state that changes 20 times a second doesn't belong in Postgres"
-      dek="Player positions, hit points, and lobby state churn constantly while a match is live. Redis is where that churn happens — Postgres only hears about it once, at the end."
-      icon="/images/redis-logo.png"
-      iconAlt="Redis logo"
-      readingTime="7 min read"
-      tags={['Redis', 'State management', 'Game dev']}
+      title={meta.headline}
+      dek={meta.dek}
+      icon={meta.icon}
+      iconAlt={`${meta.part} logo`}
+      cover={meta.cover}
+      readingTime={meta.readingTime}
+      tags={meta.tags}
       sections={sections}
     >
       <P>

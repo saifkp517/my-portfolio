@@ -1,5 +1,8 @@
 import ArticleLayout from '../../components/articles/ArticleLayout.jsx'
 import { H2, P, UL, LI, Strong, InlineCode, Callout, CodeBlock } from '../../components/articles/Prose.jsx'
+import { stackItems } from '../../data/stack.js'
+
+const meta = stackItems.find((item) => item.key === 'websockets')
 
 const sections = [
   { id: 'the-cost-of-lag', label: 'Why HTTP wasn’t going to cut it' },
@@ -16,12 +19,13 @@ export default function WebSocketsArticle() {
   return (
     <ArticleLayout
       stackKey="websockets"
-      title="Keeping a forest full of players in sync, 20 times a second"
-      dek="Every roll, every shot, every kill in Zentra travels over a single WebSocket connection. Here's how the netcode holds up when a dozen spheres are trying to eliminate each other in real time."
-      icon="/images/websockets-logo.svg"
-      iconAlt="WebSockets logo"
-      readingTime="8 min read"
-      tags={['Realtime', 'Networking', 'Game dev']}
+      title={meta.headline}
+      dek={meta.dek}
+      icon={meta.icon}
+      iconAlt={`${meta.part} logo`}
+      cover={meta.cover}
+      readingTime={meta.readingTime}
+      tags={meta.tags}
       sections={sections}
     >
       <P>

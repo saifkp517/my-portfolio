@@ -15,6 +15,8 @@ export default function ArticleLayout({
   dek,
   icon,
   iconAlt = '',
+  cover,
+  coverAlt = '',
   readingTime,
   tags = [],
   sections,
@@ -72,6 +74,12 @@ export default function ArticleLayout({
                 <p className="mt-4 max-w-2xl text-balance text-base leading-relaxed text-neutral-600 dark:text-white/65">
                   {dek}
                 </p>
+              )}
+
+              {cover && (
+                <div className="mt-6 aspect-[21/9] w-full overflow-hidden rounded-xl border border-neutral-200 dark:border-line">
+                  <img src={cover} alt={coverAlt} className="h-full w-full object-cover" />
+                </div>
               )}
 
               {(readingTime || tags.length > 0) && (

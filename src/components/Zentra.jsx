@@ -83,42 +83,57 @@ export default function Zentra() {
               Under the hood
             </h3>
           </Reveal>
-          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {stackItems.map((item, i) => {
-              const content = (
-                <>
-                  <div className="flex items-center gap-2">
-                    {item.icon && (
-                      <img src={item.icon} alt="" className="h-5 w-5 shrink-0 rounded" />
+          <div className="mt-6 divide-y divide-line rounded-xl border border-line bg-panel">
+            {stackItems.map((item, i) => (
+              <Reveal key={item.key} delay={i * 70}>
+                <div className="flex gap-4 p-5 sm:gap-5 sm:p-6">
+                  <div className="h-20 w-28 shrink-0 overflow-hidden rounded-lg border border-line bg-white/[0.03] sm:h-24 sm:w-32">
+                    {item.cover ? (
+                      <img src={item.cover} alt="" className="h-full w-full object-cover" />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center p-1.5">
+                        <span className="text-center font-mono text-[8px] uppercase leading-tight tracking-wide text-white/25">
+                          Add cover image
+                        </span>
+                      </div>
                     )}
-                    <p className="font-mono text-sm font-semibold text-accent-400">{item.part}</p>
                   </div>
-                  <p className="mt-2 text-xs leading-relaxed text-white/60">{item.role}</p>
-                  {!item.to && (
-                    <p className="mt-2 font-mono text-[11px] text-white/35">
-                      Article yet to be published
-                    </p>
-                  )}
-                </>
-              )
 
-              return (
-                <Reveal key={item.key} delay={i * 70}>
-                  {item.to ? (
-                    <Link
-                      to={item.to}
-                      className="block h-full rounded-xl border border-line bg-panel p-5 transition-colors hover:border-accent-500/30"
-                    >
-                      {content}
-                    </Link>
-                  ) : (
-                    <div className="h-full rounded-xl border border-line bg-panel p-5 transition-colors hover:border-accent-500/30">
-                      {content}
+                  <div className="min-w-0">
+                    <p className="font-mono text-[10px] uppercase tracking-widest text-white/35">
+                      Under the hood / {item.to ? 'Published' : 'Coming soon'}
+                    </p>
+                    <div className="mt-2 border-t border-dashed border-white/15 pt-3">
+                      <h4 className="text-balance font-display text-base font-semibold leading-snug tracking-tight text-white sm:text-lg">
+                        {item.to ? (
+                          <Link to={item.to} className="transition-colors hover:text-accent-400">
+                            {item.headline}
+                          </Link>
+                        ) : (
+                          item.headline
+                        )}
+                      </h4>
+                      <p className="mt-1 font-mono text-xs italic text-white/40">{item.part}</p>
+                      <p className="mt-3 text-sm leading-relaxed text-white/65">
+                        {item.role}{' '}
+                        {item.to && (
+                          <>
+                            For the full breakdown,{' '}
+                            <Link
+                              to={item.to}
+                              className="text-accent-400 underline underline-offset-4 transition-colors hover:text-accent-300"
+                            >
+                              read the article
+                            </Link>
+                            .
+                          </>
+                        )}
+                      </p>
                     </div>
-                  )}
-                </Reveal>
-              )
-            })}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
 
