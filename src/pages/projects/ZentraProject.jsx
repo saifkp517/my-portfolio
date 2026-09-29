@@ -98,8 +98,8 @@ export default function ZentraProject() {
           <div className="mt-6 divide-y divide-line rounded-xl border border-line bg-panel">
             {stackItems.map((item, i) => (
               <Reveal key={item.key} delay={i * 70}>
-                <div className="flex gap-4 p-5 sm:gap-5 sm:p-6">
-                  <div className="h-20 w-28 shrink-0 overflow-hidden rounded-lg border border-line bg-white/[0.03] sm:h-24 sm:w-32">
+                <div className="flex flex-col gap-4 p-5 sm:flex-row sm:gap-5 sm:p-6">
+                  <div className="aspect-[16/10] w-full shrink-0 overflow-hidden rounded-lg border border-line bg-white/[0.03] sm:aspect-auto sm:h-24 sm:w-32">
                     {item.cover ? (
                       <img src={item.cover} alt="" className="h-full w-full object-cover" />
                     ) : (

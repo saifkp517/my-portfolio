@@ -42,21 +42,38 @@ export default function Hero() {
                 Open to opportunities
               </span>
             </p>
-            <a
-              href="mailto:saifkp517@gmail.com"
-              className="mt-1.5 inline-flex items-center gap-1.5 font-mono text-xs text-white/45 transition-colors hover:text-accent-400"
-            >
-              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path
-                  d="M2.5 4h11v8h-11V4zm0 0l5.5 4.5L13.5 4"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              saifkp517@gmail.com
-            </a>
+            <div className="mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1">
+              <a
+                href="mailto:saifkp517@gmail.com"
+                className="inline-flex items-center gap-1.5 font-mono text-xs text-white/45 transition-colors hover:text-accent-400"
+              >
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path
+                    d="M2.5 4h11v8h-11V4zm0 0l5.5 4.5L13.5 4"
+                    stroke="currentColor"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                saifkp517@gmail.com
+              </a>
+              <a
+                href="tel:+919148654500"
+                className="inline-flex items-center gap-1.5 font-mono text-xs text-white/45 transition-colors hover:text-accent-400"
+              >
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path
+                    d="M3.5 2.5h2.4l1 3-1.5 1.2a8 8 0 004 4l1.2-1.5 3 1v2.4c0 .6-.5 1-1.1.95C7.6 13.1 2.9 8.4 2.55 3.6c-.05-.6.35-1.1.95-1.1z"
+                    stroke="currentColor"
+                    strokeWidth="1.3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                +91 9148654500
+              </a>
+            </div>
           </div>
         </Reveal>
 

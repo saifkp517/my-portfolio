@@ -23,19 +23,6 @@ const LINKS = [
       />
     ),
   },
-  {
-    label: 'Phone',
-    href: 'tel:+919148654500',
-    icon: (
-      <path
-        d="M3.5 2.5h2.4l1 3-1.5 1.2a8 8 0 004 4l1.2-1.5 3 1v2.4c0 .6-.5 1-1.1.95C7.6 13.1 2.9 8.4 2.55 3.6c-.05-.6.35-1.1.95-1.1z"
-        stroke="currentColor"
-        strokeWidth="1.3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    ),
-  },
 ]
 
 export default function SocialLinks({ className = '' }) {
