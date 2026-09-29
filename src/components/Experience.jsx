@@ -133,19 +133,14 @@ function ExperienceRow({ item, defaultOpen }) {
 
 export default function Experience() {
   return (
-    <section id="experience" className="border-t border-line py-24 sm:py-32">
+    <section id="experience" className="border-t border-line py-20 sm:py-28">
       <div className="mx-auto max-w-content px-5 sm:px-8">
         <Reveal>
-          <p className="font-mono text-xs uppercase tracking-widest text-accent-400">Experience</p>
-        </Reveal>
-        <Reveal delay={60}>
-          <h2 className="mt-3 max-w-2xl text-balance font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
-            What I've been building on the job
-          </h2>
+          <p className="font-mono text-xs uppercase tracking-widest text-white/40">Experience</p>
         </Reveal>
 
-        <Reveal delay={120}>
-          <div className="mt-10 divide-y divide-line rounded-xl border border-line bg-panel px-5 sm:px-6">
+        <Reveal delay={80}>
+          <div className="mt-8 divide-y divide-line rounded-xl border border-line bg-panel px-5 py-5 sm:px-6 sm:py-6">
             {roles.map((item, i) => (
               <ExperienceRow key={item.company} item={item} defaultOpen={i === 0} />
             ))}

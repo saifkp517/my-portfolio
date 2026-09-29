@@ -1,8 +1,11 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import Chip from './Chip.jsx'
-import CTAButton from './CTAButton.jsx'
-import Reveal from './Reveal.jsx'
-import { stackItems } from '../data/stack.js'
+import Chip from '../../components/Chip.jsx'
+import CTAButton from '../../components/CTAButton.jsx'
+import Reveal from '../../components/Reveal.jsx'
+import Footer from '../../components/Footer.jsx'
+import ProjectHeader from '../../components/projects/ProjectHeader.jsx'
+import { stackItems } from '../../data/stack.js'
 
 const deepDives = [
   {
@@ -19,17 +22,26 @@ const deepDives = [
   },
 ]
 
-export default function Zentra() {
+export default function ZentraProject() {
+  useEffect(() => {
+    const previous = document.title
+    document.title = 'Zentra — Saifullah Khan'
+    return () => {
+      document.title = previous
+    }
+  }, [])
+
   return (
-    <section id="zentra" className="border-t border-line py-24 sm:py-32">
-      <div className="mx-auto max-w-content px-5 sm:px-8">
+    <div className="min-h-screen bg-ink">
+      <ProjectHeader />
+      <main className="mx-auto max-w-content px-5 py-14 sm:px-8 sm:py-20">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-widest text-accent-400">Project 1</p>
         </Reveal>
         <Reveal delay={60}>
-          <h2 className="mt-3 max-w-2xl text-balance font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
+          <h1 className="mt-3 max-w-2xl text-balance font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
             Zentra — a forest-based PVP shooter .io game
-          </h2>
+          </h1>
         </Reveal>
 
         <Reveal delay={100} className="mt-4 flex flex-wrap gap-2">
@@ -156,7 +168,25 @@ export default function Zentra() {
             <p className="mt-4 font-mono text-[11px] text-white/35">Not published yet.</p>
           </div>
         </Reveal>
-      </div>
-    </section>
+
+        <div className="mt-14 flex items-center justify-between border-t border-line pt-8 text-sm">
+          <Link
+            to="/#projects"
+            className="inline-flex items-center gap-2 font-mono text-xs text-white/50 transition-colors hover:text-accent-400"
+          >
+            ← Back to projects
+          </Link>
+          <a
+            href="https://zentra-io.vercel.app/"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 font-mono text-xs font-semibold text-accent-400 transition-colors hover:text-accent-300"
+          >
+            Play Zentra ↗
+          </a>
+        </div>
+      </main>
+      <Footer />
+    </div>
   )
 }

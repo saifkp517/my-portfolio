@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react'
-import Reveal from './Reveal.jsx'
 
 const USERNAME = 'saifkp517'
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -10,9 +9,11 @@ const LEVEL_CLASSES = [
   'bg-accent-500/75',
   'bg-accent-500',
 ]
-const SQUARE = 11
-const GAP = 3
+const SQUARE = 9
+const GAP = 2.5
 
+// Compact contribution heatmap, sized to sit inline in the hero rather than
+// as its own full-height section.
 export default function GithubActivity() {
   const [contributions, setContributions] = useState(null)
   const [total, setTotal] = useState(null)
@@ -54,7 +55,7 @@ export default function GithubActivity() {
   const monthLabels = useMemo(() => {
     const labels = []
     let lastMonth = -1
-    weeks.forEach((week, i) => {
+    weeks.forEach((week) => {
       const firstFilled = week.find(Boolean)
       if (!firstFilled) return
       const month = new Date(`${firstFilled.date}T00:00:00`).getMonth()
@@ -69,97 +70,65 @@ export default function GithubActivity() {
   }, [weeks])
 
   return (
-    <section id="activity" className="border-t border-line py-24 sm:py-32">
-      <div className="mx-auto max-w-content px-5 sm:px-8">
-        <Reveal>
-          <p className="font-mono text-xs uppercase tracking-widest text-accent-400">Open source</p>
-        </Reveal>
-        <Reveal delay={60}>
-          <h2 className="mt-3 max-w-2xl text-balance font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
-            {total !== null
-              ? `${total.toLocaleString()} contributions in the last year`
-              : "Still committing after hours"}
-          </h2>
-        </Reveal>
+    <div className="rounded-xl border border-line bg-panel p-4 sm:p-5">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="font-mono text-[11px] uppercase tracking-widest text-white/40">
+          {status === 'ready' && total !== null
+            ? `${total.toLocaleString()} contributions, past year`
+            : 'GitHub activity'}
+        </p>
+        <a
+          href={`https://github.com/${USERNAME}`}
+          target="_blank"
+          rel="noreferrer"
+          className="font-mono text-[11px] font-semibold text-accent-400 transition-colors hover:text-accent-300"
+        >
+          Profile →
+        </a>
+      </div>
 
-        <Reveal delay={120}>
-          <div className="mt-10 rounded-2xl border border-line bg-panel p-6 sm:p-8">
-            {status === 'error' && (
-              <p className="text-sm text-white/60">
-                Couldn't load live activity right now — take a look directly on{' '}
-                <a
-                  href={`https://github.com/${USERNAME}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-accent-400 underline underline-offset-4 hover:text-accent-300"
+      {status === 'error' && (
+        <p className="mt-3 text-xs text-white/50">Couldn't load live activity right now.</p>
+      )}
+
+      {status === 'loading' && (
+        <div className="mt-3 h-[76px] w-full animate-pulse rounded-lg bg-white/[0.04]" />
+      )}
+
+      {status === 'ready' && (
+        <div className="thin-scrollbar mt-3 overflow-x-auto pb-2">
+          <div style={{ width: 'max-content' }}>
+            <div className="flex" style={{ gap: `${GAP}px` }}>
+              {weeks.map((_, i) => (
+                <div
+                  key={i}
+                  className="shrink-0 font-mono text-[8px] text-white/30"
+                  style={{ width: `${SQUARE}px` }}
                 >
-                  GitHub
-                </a>
-                .
-              </p>
-            )}
-
-            {status === 'loading' && (
-              <div className="h-[98px] w-full animate-pulse rounded-lg bg-white/[0.04]" />
-            )}
-
-            {status === 'ready' && (
-              <div className="overflow-x-auto pb-2">
-                <div style={{ width: 'max-content' }}>
-                  <div className="flex" style={{ gap: `${GAP}px` }}>
-                    {weeks.map((_, i) => (
-                      <div
-                        key={i}
-                        className="shrink-0 font-mono text-[9px] text-white/35"
-                        style={{ width: `${SQUARE}px` }}
-                      >
-                        {monthLabels[i] !== null && monthLabels[i] !== undefined
-                          ? MONTHS[monthLabels[i]]
-                          : ''}
-                      </div>
-                    ))}
-                  </div>
-                  <div
-                    className="mt-1 grid"
-                    style={{
-                      gridTemplateRows: `repeat(7, ${SQUARE}px)`,
-                      gridAutoFlow: 'column',
-                      gridAutoColumns: `${SQUARE}px`,
-                      gap: `${GAP}px`,
-                    }}
-                  >
-                    {cells.map((day, i) => (
-                      <div
-                        key={i}
-                        title={day ? `${day.count} contribution${day.count === 1 ? '' : 's'} on ${day.date}` : undefined}
-                        className={`rounded-[2px] ${day ? LEVEL_CLASSES[day.level] : 'bg-transparent'}`}
-                      />
-                    ))}
-                  </div>
+                  {monthLabels[i] !== null && monthLabels[i] !== undefined ? MONTHS[monthLabels[i]] : ''}
                 </div>
-              </div>
-            )}
-
-            <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-5">
-              <div className="flex items-center gap-1.5 font-mono text-[11px] text-white/35">
-                <span>Less</span>
-                {LEVEL_CLASSES.map((cls, i) => (
-                  <span key={i} className={`h-[11px] w-[11px] rounded-[2px] ${cls}`} />
-                ))}
-                <span>More</span>
-              </div>
-              <a
-                href={`https://github.com/${USERNAME}`}
-                target="_blank"
-                rel="noreferrer"
-                className="font-mono text-xs font-semibold text-accent-400 transition-colors hover:text-accent-300"
-              >
-                View full profile →
-              </a>
+              ))}
+            </div>
+            <div
+              className="mt-1 grid"
+              style={{
+                gridTemplateRows: `repeat(7, ${SQUARE}px)`,
+                gridAutoFlow: 'column',
+                gridAutoColumns: `${SQUARE}px`,
+                gap: `${GAP}px`,
+              }}
+            >
+              {cells.map((day, i) => (
+                <div
+                  key={i}
+                  title={day ? `${day.count} contribution${day.count === 1 ? '' : 's'} on ${day.date}` : undefined}
+                  className={`rounded-[2px] ${day ? LEVEL_CLASSES[day.level] : 'bg-transparent'}`}
+                />
+              ))}
             </div>
           </div>
-        </Reveal>
-      </div>
-    </section>
+        </div>
+      )}
+    </div>
   )
 }

@@ -42,7 +42,7 @@ export default function ArticleLayout({
         <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white/85 backdrop-blur-md dark:border-line dark:bg-ink/85">
           <div className="mx-auto flex max-w-content items-center justify-between gap-4 px-5 py-4 sm:px-8">
             <Link
-              to="/#zentra"
+              to="/projects/zentra"
               className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-neutral-500 transition-colors hover:text-accent-600 dark:text-white/50 dark:hover:text-accent-400"
             >
               <ArrowLeftIcon />
@@ -109,7 +109,7 @@ export default function ArticleLayout({
 
               <div className="mt-14 flex flex-col gap-4 border-t border-neutral-200 pt-8 text-sm dark:border-line sm:flex-row sm:items-center sm:justify-between">
                 <Link
-                  to="/#zentra"
+                  to="/projects/zentra"
                   className="inline-flex items-center gap-2 font-mono text-xs text-neutral-500 transition-colors hover:text-accent-600 dark:text-white/50 dark:hover:text-accent-400"
                 >
                   <ArrowLeftIcon />

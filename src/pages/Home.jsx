@@ -3,9 +3,7 @@ import { useLocation } from 'react-router-dom'
 import Nav from '../components/Nav.jsx'
 import Hero from '../components/Hero.jsx'
 import Experience from '../components/Experience.jsx'
-import Zentra from '../components/Zentra.jsx'
-import Erp from '../components/Erp.jsx'
-import GithubActivity from '../components/GithubActivity.jsx'
+import Projects from '../components/Projects.jsx'
 import Contact from '../components/Contact.jsx'
 import Footer from '../components/Footer.jsx'
 
@@ -24,9 +22,7 @@ export default function Home() {
       <main>
         <Hero />
         <Experience />
-        <Zentra />
-        <Erp />
-        <GithubActivity />
+        <Projects />
         <Contact />
       </main>
       <Footer />
