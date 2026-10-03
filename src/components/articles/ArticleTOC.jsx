@@ -39,7 +39,7 @@ export function ArticleTOCDesktop({ sections, activeId }) {
                 href={`#${s.id}`}
                 className={`-ml-px block border-l-2 py-1.5 pl-4 text-[13px] leading-snug transition-colors ${
                   active
-                    ? 'border-accent-500 font-medium text-accent-600 dark:text-accent-400'
+                    ? 'border-accent-600 font-medium text-accent-600 dark:border-accent-400 dark:text-accent-400'
                     : 'border-transparent text-neutral-500 hover:text-neutral-900 dark:text-white/50 dark:hover:text-white'
                 }`}
               >
