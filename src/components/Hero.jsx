@@ -1,98 +1,181 @@
-import { useRef } from 'react'
-import Chip from './Chip.jsx'
 import CTAButton from './CTAButton.jsx'
-import Reveal from './Reveal.jsx'
 import SocialLinks from './SocialLinks.jsx'
-import GithubActivity from './GithubActivity.jsx'
-import CursorGlow from './CursorGlow.jsx'
+import LocalClock from './LocalClock.jsx'
+import ObfuscatedPhone from './ObfuscatedPhone.jsx'
+import HeroCover from './HeroCover.jsx'
+import FullBleedRule from './frame/FullBleedRule.jsx'
+import { CORE_STACK } from '../data/coreStack.js'
+import { projects } from '../data/projects.js'
+import { META_COLORS } from '../data/iconColors.js'
+import { hexToRgba } from '../lib/color.js'
 
-const stack = ['TypeScript', 'NestJS', 'Next.js', 'PostgreSQL', 'Redis', 'WebSockets', 'TypeORM', 'Supabase']
+const STACK_TEXT = CORE_STACK.map((t) => t.name).join(' · ')
+const ZENTRA = projects.find((p) => p.key === 'zentra')
+
+function MetaIconTile({ children, color }) {
+  return (
+    <span
+      className="flex h-6 w-6 shrink-0 items-center justify-center rounded-sm border"
+      style={{ backgroundColor: hexToRgba(color, 0.11), borderColor: hexToRgba(color, 0.11), color }}
+    >
+      {children}
+    </span>
+  )
+}
+
+function MetaRow({ icon, color, children, rightBorder }) {
+  return (
+    <div
+      className={`flex items-center gap-2.5 border-b border-line px-5 py-3 sm:px-6 ${
+        rightBorder ? 'sm:border-r' : ''
+      }`}
+    >
+      <MetaIconTile color={color}>{icon}</MetaIconTile>
+      <span className="min-w-0 truncate font-mono text-sm text-white/75">{children}</span>
+    </div>
+  )
+}
+
+const ICONS = {
+  role: (
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M5.5 3.5L2 8l3.5 4.5M10.5 3.5L14 8l-3.5 4.5"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  stack: (
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M8 2.5l5.5 2.75L8 8 2.5 5.25 8 2.5zM2.5 8.75L8 11.5l5.5-2.75M2.5 11.75L8 14.5l5.5-2.75"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  location: (
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M8 14.5s4.5-4.17 4.5-7.5a4.5 4.5 0 10-9 0c0 3.33 4.5 7.5 4.5 7.5z"
+        stroke="currentColor"
+        strokeWidth="1.3"
+        strokeLinejoin="round"
+      />
+      <circle cx="8" cy="7" r="1.5" stroke="currentColor" strokeWidth="1.2" />
+    </svg>
+  ),
+  time: (
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.3" />
+      <path d="M8 5v3.2l2.2 1.3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  email: (
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M2.5 4h11v8h-11V4zm0 0l5.5 4.5L13.5 4"
+        stroke="currentColor"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  phone: (
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M3.5 2.5h2.4l1 3-1.5 1.2a8 8 0 004 4l1.2-1.5 3 1v2.4c0 .6-.5 1-1.1.95C7.6 13.1 2.9 8.4 2.55 3.6c-.05-.6.35-1.1.95-1.1z"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+}
 
 export default function Hero() {
-  const sectionRef = useRef(null)
-
   return (
-    <section
-      id="top"
-      ref={sectionRef}
-      className="relative overflow-hidden pb-16 pt-32 sm:pb-20 sm:pt-40"
-    >
-      {/* grid texture */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.08]"
-        style={{
-          backgroundImage:
-            'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
-          backgroundSize: '44px 44px',
-        }}
-      />
-      <CursorGlow containerRef={sectionRef} />
+    <section id="top" className="flex flex-col">
+      {/* Row A — Cover: Dither background (replaces the old Zentra screenshot) */}
+      <div className="relative h-[clamp(180px,28vh,280px)] overflow-hidden bg-ink">
+        <HeroCover />
+      </div>
 
-      <div className="relative mx-auto max-w-content px-5 sm:px-8">
-        <Reveal className="flex items-center gap-4">
+      <FullBleedRule />
+
+      {/* Row B — Identity */}
+      <div className="flex items-stretch px-5 sm:px-6">
+        <div className="flex h-24 w-24 shrink-0 border-r border-line">
           <img
             src="/images/avatar.png"
             alt="Saifullah Khan"
-            className="h-14 w-14 shrink-0 rounded-full border border-line bg-white object-cover"
+            className="h-full w-full bg-white object-cover"
           />
-          <div className="min-w-0">
-            <h1 className="font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
-              Saifullah Khan
-            </h1>
-            <p className="mt-1 flex flex-wrap items-center gap-2 font-mono text-xs text-white/50">
-              Full-stack developer
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-white/[0.03] px-2 py-0.5 text-[10px] text-white/45">
-                <span className="h-1.5 w-1.5 rounded-full bg-accent-500" />
-                Open to opportunities
-              </span>
-            </p>
-            <div className="mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1">
-              <a
-                href="mailto:saifkp517@gmail.com"
-                className="inline-flex items-center gap-1.5 font-mono text-xs text-white/45 transition-colors hover:text-accent-400"
-              >
-                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path
-                    d="M2.5 4h11v8h-11V4zm0 0l5.5 4.5L13.5 4"
-                    stroke="currentColor"
-                    strokeWidth="1.4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                saifkp517@gmail.com
-              </a>
-              <a
-                href="tel:+919148654500"
-                className="inline-flex items-center gap-1.5 font-mono text-xs text-white/45 transition-colors hover:text-accent-400"
-              >
-                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path
-                    d="M3.5 2.5h2.4l1 3-1.5 1.2a8 8 0 004 4l1.2-1.5 3 1v2.4c0 .6-.5 1-1.1.95C7.6 13.1 2.9 8.4 2.55 3.6c-.05-.6.35-1.1.95-1.1z"
-                    stroke="currentColor"
-                    strokeWidth="1.3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                +91 9148654500
-              </a>
-            </div>
-          </div>
-        </Reveal>
-
-        <Reveal delay={80}>
-          <p className="mt-6 max-w-xl text-balance text-[15px] leading-relaxed text-white/70 sm:text-base">
-            I ship real-time systems, web games and production business software — TypeScript, NestJS,
-            PostgreSQL and Redis.
+        </div>
+        <div className="flex min-w-0 flex-1 flex-col justify-center pl-4 py-3 sm:pl-5">
+          <h1 className="flex items-center gap-2 font-body text-[28px] font-medium leading-tight tracking-tight text-white sm:text-[32px]">
+            Saifullah Khan
+            <span
+              className="h-2 w-2 shrink-0 rounded-full bg-accent-500"
+              role="img"
+              aria-label="Open to opportunities"
+              title="Open to opportunities"
+            />
+          </h1>
+          <p className="mt-1 truncate font-mono text-xs text-white/60">
+            I ship real-time systems, web games and business software.
           </p>
-        </Reveal>
+        </div>
+      </div>
 
-        <Reveal delay={140} className="mt-6 flex flex-wrap items-center gap-3">
+      <FullBleedRule />
+
+      {/* Row C — Social icons */}
+      <div className="px-5 py-3 sm:px-6">
+        <SocialLinks size="sm" />
+      </div>
+
+      <FullBleedRule />
+
+      {/* Row D — Meta grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2">
+        <MetaRow icon={ICONS.role} color={META_COLORS.role} rightBorder>
+          Full-stack developer
+        </MetaRow>
+        <MetaRow icon={ICONS.stack} color={META_COLORS.stack}>
+          {STACK_TEXT}
+        </MetaRow>
+        <MetaRow icon={ICONS.location} color={META_COLORS.location} rightBorder>
+          India
+        </MetaRow>
+        <MetaRow icon={ICONS.time} color={META_COLORS.time}>
+          <LocalClock />
+        </MetaRow>
+        <MetaRow icon={ICONS.email} color={META_COLORS.email} rightBorder>
+          <a href="mailto:saifkp517@gmail.com" className="transition-colors hover:text-accent-400">
+            saifkp517@gmail.com
+          </a>
+        </MetaRow>
+        <MetaRow icon={ICONS.phone} color={META_COLORS.phone}>
+          <ObfuscatedPhone className="transition-colors hover:text-accent-400" />
+        </MetaRow>
+      </div>
+
+      <FullBleedRule />
+
+      {/* Row E — CTA */}
+      <div className="px-5 py-4 sm:px-6">
+        <div className="flex flex-wrap items-center gap-3">
           <CTAButton href="https://zentra-io.vercel.app/" variant="primary">
             Play Zentra
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M5 3.5l7 4.5-7 4.5v-9z" fill="currentColor" />
             </svg>
           </CTAButton>
@@ -104,20 +187,8 @@ export default function Hero() {
           >
             Resume
           </CTAButton>
-          <SocialLinks className="ml-1" />
-        </Reveal>
-
-        <Reveal delay={200} className="mt-8 flex flex-wrap items-center gap-2">
-          {stack.map((item) => (
-            <Chip key={item} strong={['TypeScript', 'NestJS', 'PostgreSQL'].includes(item)}>
-              {item}
-            </Chip>
-          ))}
-        </Reveal>
-
-        <Reveal delay={260} className="mt-6 max-w-md">
-          <GithubActivity />
-        </Reveal>
+        </div>
+        {ZENTRA && <p className="mt-2.5 font-mono text-xs text-white/55">{ZENTRA.tagline}</p>}
       </div>
     </section>
   )

@@ -1,3 +1,6 @@
+import { SOCIAL_COLORS } from '../data/iconColors.js'
+import { hexToRgba } from '../lib/color.js'
+
 const LINKS = [
   {
     label: 'GitHub',
@@ -23,26 +26,53 @@ const LINKS = [
       />
     ),
   },
+  {
+    label: 'Email',
+    href: 'mailto:saifkp517@gmail.com',
+    icon: (
+      <path
+        d="M2.5 4h11v8h-11V4zm0 0l5.5 4.5L13.5 4"
+        stroke="currentColor"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    ),
+  },
 ]
 
-export default function SocialLinks({ className = '' }) {
+const SIZES = {
+  md: 'h-11 w-11',
+  sm: 'h-7 w-7',
+}
+
+export default function SocialLinks({ className = '', size = 'md', iconSize = 16 }) {
+  const px = size === 'sm' ? 13 : iconSize
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      {LINKS.map(({ label, href, icon }) => (
-        <a
-          key={label}
-          href={href}
-          target={href.startsWith('http') ? '_blank' : undefined}
-          rel={href.startsWith('http') ? 'noreferrer' : undefined}
-          aria-label={label}
-          title={label}
-          className="flex h-9 w-9 items-center justify-center rounded-md border border-line bg-white/[0.03] text-white/55 transition-colors hover:border-accent-500/40 hover:text-accent-400"
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            {icon}
-          </svg>
-        </a>
-      ))}
+      {LINKS.map(({ label, href, icon }) => {
+        const color = SOCIAL_COLORS[label]
+        return (
+          <a
+            key={label}
+            href={href}
+            target={href.startsWith('http') ? '_blank' : undefined}
+            rel={href.startsWith('http') ? 'noreferrer' : undefined}
+            aria-label={label}
+            title={label}
+            style={{
+              backgroundColor: hexToRgba(color, 0.11),
+              borderColor: hexToRgba(color, 0.11),
+              color,
+            }}
+            className={`flex items-center justify-center rounded-sm border transition-opacity hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink ${SIZES[size]}`}
+          >
+            <svg width={px} height={px} viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              {icon}
+            </svg>
+          </a>
+        )
+      })}
     </div>
   )
 }

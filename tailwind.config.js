@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: 'class',
-  content: ['./index.html', './src/**/*.{js,jsx}'],
+  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -9,15 +9,28 @@ export default {
         panel: '#111317',
         line: 'rgba(255,255,255,0.09)',
         accent: {
-          DEFAULT: '#E4E4E7',
-          50: '#fafafa',
-          300: '#d4d4d8',
-          400: '#a1a1aa',
-          500: '#E4E4E7',
-          600: '#52525b',
-          700: '#3f3f46',
+          DEFAULT: '#36CE9E',
+          50: '#f0fdf9',
+          400: '#2dd4bf',
+          500: '#36CE9E',
+          600: '#0d9488',
+          700: '#0f766e',
+        },
+        // Small harmonious palette for tinting generic (non-brand) icons —
+        // same hex values are mirrored in src/data/iconColors.js, since
+        // runtime color math (rgba tints, the Dither canvas) needs the raw
+        // hex and can't read this config at runtime.
+        meta: {
+          sky: '#38BDF8',
+          violet: '#A78BFA',
+          rose: '#FB7185',
+          amber: '#FBBF24',
+          indigo: '#818CF8',
         },
       },
+      // Type system: font-mono (JetBrains Mono) for headings, labels, meta,
+      // captions and all UI chrome/buttons; font-body (Inter) for paragraph
+      // copy only. Don't mix the two inside the same role.
       fontFamily: {
         display: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
         body: ['"Inter"', 'system-ui', 'sans-serif'],
