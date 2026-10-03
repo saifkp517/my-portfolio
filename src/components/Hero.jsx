@@ -112,15 +112,15 @@ export default function Hero() {
 
       {/* Row B — Identity */}
       <div className="flex items-stretch px-5 sm:px-6">
-        <div className="flex h-24 w-24 shrink-0 border-r border-line">
+        <div className="flex h-16 w-16 shrink-0 border-r border-line sm:h-24 sm:w-24">
           <img
             src="/images/avatar.png"
             alt="Saifullah Khan"
             className="h-full w-full bg-white object-cover"
           />
         </div>
-        <div className="flex min-w-0 flex-1 flex-col justify-center pl-4 py-3 sm:pl-5">
-          <h1 className="flex items-center gap-2 font-body text-[28px] font-medium leading-tight tracking-tight text-white sm:text-[32px]">
+        <div className="flex min-w-0 flex-1 flex-col justify-center pl-3 py-3 sm:pl-5">
+          <h1 className="flex items-center gap-2 font-body text-xl font-medium leading-tight tracking-tight text-white sm:text-[32px]">
             Saifullah Khan
             <span
               className="h-2 w-2 shrink-0 rounded-full bg-accent-500"

@@ -83,13 +83,13 @@ export default function HeroCover() {
           waveColor={WAVE_COLOR}
           backgroundColor={BACKGROUND_COLOR}
           colorNum={3}
-          pixelSize={isMobile ? 4 : 3}
+          pixelSize={3}
           waveSpeed={0.02}
           waveAmplitude={0.2}
           waveFrequency={3}
           enableMouseInteraction={false}
           disableAnimation={reducedMotion}
-          dpr={isMobile ? 1 : 1.5}
+          dpr={isMobile ? 2 : 1.5}
           frameloop={inView ? 'always' : 'never'}
         />
       </Suspense>

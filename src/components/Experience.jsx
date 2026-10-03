@@ -60,7 +60,7 @@ function ExperienceRow({ item, defaultOpen }) {
   const [open, setOpen] = useState(defaultOpen)
 
   return (
-    <div className="py-6 first:pt-0 last:pb-0">
+    <div className="py-6">
       <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
         <div className="flex items-center gap-2.5">
           <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent-500/15 font-mono text-[9px] font-semibold text-accent-400">

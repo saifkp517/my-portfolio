@@ -15,6 +15,10 @@ const MONTH_LABEL_H = 14
 // Minimum weeks between two month labels so neighbouring abbreviations
 // (e.g. "Sep" / "Oct") never collide into "SepOct".
 const MIN_LABEL_GAP_WEEKS = 3
+// Below this, a year of weekly columns stops being legible — stop shrinking
+// and let the figure scroll horizontally instead (mobile only; at tablet/
+// desktop widths there's always enough room to hit this floor).
+const MIN_SQUARE = 9
 
 export default function GithubActivity() {
   const [contributions, setContributions] = useState(null)
@@ -66,13 +70,17 @@ export default function GithubActivity() {
     return out
   }, [cells])
 
-  // Cell size is purely a function of the measured container width ÷ week
-  // count — no min/max clamp, so the grid always fills exactly 100% of its
-  // row (rail to rail) with no empty space on the right and never scrolls.
-  const { square, gap } = useMemo(() => {
-    if (!gridWidth || !weeks.length) return { square: 10, gap: 3 }
+  // Cell size is the measured container width ÷ week count, same as before —
+  // but floored at MIN_SQUARE so a year of columns never shrinks past
+  // legibility. On mobile that floor is wider than the available width, so
+  // the figure switches to a fixed-size, horizontally-scrollable grid;
+  // at tablet/desktop widths `fit` already clears the floor and it still
+  // fills exactly 100% of the row (rail to rail) with no scroll, unchanged.
+  const { square, gap, isOverflowing } = useMemo(() => {
+    if (!gridWidth || !weeks.length) return { square: 10, gap: 3, isOverflowing: false }
     const fit = gridWidth / weeks.length / (1 + GAP_RATIO)
-    return { square: fit, gap: fit * GAP_RATIO }
+    const square = Math.max(fit, MIN_SQUARE)
+    return { square, gap: square * GAP_RATIO, isOverflowing: square > fit }
   }, [gridWidth, weeks.length])
 
   const monthLabels = useMemo(() => {
@@ -117,47 +125,56 @@ export default function GithubActivity() {
       {status === 'loading' && <div className="mx-5 h-[140px] animate-pulse rounded-sm bg-white/[0.04] sm:mx-6" />}
 
       {status === 'ready' && (
-        <div ref={gridWrapRef} className="relative w-full px-5 sm:px-6">
-          {/* Month labels, directly above the grid, aligned to each week column */}
-          <div className="flex" style={{ gap: `${gap}px`, height: MONTH_LABEL_H }}>
-            {weeks.map((_, i) => (
-              <div key={i} className="min-w-0 flex-1 font-mono text-[8px] text-white/55">
-                {monthLabels[i] !== null && monthLabels[i] !== undefined ? MONTHS[monthLabels[i]] : ''}
-              </div>
-            ))}
-          </div>
-
-          {/* Grid — spans the full rail-to-rail width, no gutter/padding */}
-          <div className="relative mt-1">
-            <div
-              className="grid"
-              style={{
-                gridTemplateRows: `repeat(7, ${square}px)`,
-                gridTemplateColumns: `repeat(${weeks.length}, 1fr)`,
-                gridAutoFlow: 'column',
-                gap: `${gap}px`,
-              }}
-            >
-              {cells.map((day, i) => (
+        <div
+          ref={gridWrapRef}
+          className={`relative w-full px-5 sm:px-6 ${isOverflowing ? 'overflow-x-auto' : ''}`}
+        >
+          <div style={isOverflowing ? { width: weeks.length * (square + gap) - gap } : undefined}>
+            {/* Month labels, directly above the grid, aligned to each week column */}
+            <div className="flex" style={{ gap: `${gap}px`, height: MONTH_LABEL_H }}>
+              {weeks.map((_, i) => (
                 <div
                   key={i}
-                  title={day ? `${day.count} contribution${day.count === 1 ? '' : 's'} on ${day.date}` : undefined}
-                  className={`rounded-[1px] ${day ? LEVEL_CLASSES[day.level] : 'bg-transparent'}`}
-                />
+                  className={`font-mono text-[8px] text-white/55 ${isOverflowing ? 'shrink-0' : 'min-w-0 flex-1'}`}
+                  style={isOverflowing ? { width: square } : undefined}
+                >
+                  {monthLabels[i] !== null && monthLabels[i] !== undefined ? MONTHS[monthLabels[i]] : ''}
+                </div>
               ))}
             </div>
 
-            {/* Mon/Wed/Fri — overlaid on the first column, no width of its own */}
-            <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-              {Object.entries(WEEKDAY_ROWS).map(([row, label]) => (
-                <span
-                  key={row}
-                  className="absolute left-0.5 font-mono text-[7px] leading-none text-white/40"
-                  style={{ top: Number(row) * (square + gap) + square / 2 - 3 }}
-                >
-                  {label}
-                </span>
-              ))}
+            {/* Grid — spans the full rail-to-rail width when it fits; scrolls on mobile */}
+            <div className="relative mt-1">
+              <div
+                className="grid"
+                style={{
+                  gridTemplateRows: `repeat(7, ${square}px)`,
+                  gridTemplateColumns: isOverflowing ? `repeat(${weeks.length}, ${square}px)` : `repeat(${weeks.length}, 1fr)`,
+                  gridAutoFlow: 'column',
+                  gap: `${gap}px`,
+                }}
+              >
+                {cells.map((day, i) => (
+                  <div
+                    key={i}
+                    title={day ? `${day.count} contribution${day.count === 1 ? '' : 's'} on ${day.date}` : undefined}
+                    className={`rounded-[1px] ${day ? LEVEL_CLASSES[day.level] : 'bg-transparent'}`}
+                  />
+                ))}
+              </div>
+
+              {/* Mon/Wed/Fri — overlaid on the first column, no width of its own */}
+              <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+                {Object.entries(WEEKDAY_ROWS).map(([row, label]) => (
+                  <span
+                    key={row}
+                    className="absolute left-0.5 font-mono text-[7px] leading-none text-white/40"
+                    style={{ top: Number(row) * (square + gap) + square / 2 - 3 }}
+                  >
+                    {label}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
