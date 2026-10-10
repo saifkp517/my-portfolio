@@ -4,8 +4,7 @@ export const projects = [
   {
     key: 'zentra',
     title: 'Zentra',
-    tagline:
-      "A forest-based PVP shooter .io game. Didn't have a startup idea, so I built a game instead.",
+    tagline: 'A forest-based PVP shooter .io game',
     tags: ['NestJS', 'WebSockets', 'Redis', 'PostgreSQL'],
     cover: '/images/zentra-gameplay.webp',
     to: '/projects/zentra',

@@ -12,7 +12,8 @@ export const META_COLORS = {
 }
 
 export const SOCIAL_COLORS = {
-  GitHub: '#F0F6FC', // GitHub's brand black fails contrast on a dark page — lightened
-  LinkedIn: '#0A66C2',
+  GitHub: '#B8C4D0',
+  LinkedIn: '#70B8F0',
+  X: '#B8C4D0',
   Email: '#36CE9E', // accent.500 (teal), matches the Row D email tone
 }

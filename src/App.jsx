@@ -16,10 +16,11 @@ function ScrollToTop() {
   return null
 }
 
-export default function App() {
+function AppRoutes() {
+  const { pathname } = useLocation()
+
   return (
-    <BrowserRouter>
-      <ScrollToTop />
+    <div key={pathname} className="route-enter">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/articles/websockets" element={<WebSocketsArticle />} />
@@ -28,6 +29,15 @@ export default function App() {
         <Route path="/projects/erp" element={<ErpProject />} />
         <Route path="*" element={<Home />} />
       </Routes>
+    </div>
+  )
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <AppRoutes />
     </BrowserRouter>
   )
 }

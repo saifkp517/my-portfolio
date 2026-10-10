@@ -13,12 +13,12 @@ export default function Projects() {
       <div className="mt-6 divide-y divide-line border-y border-line">
         {projects.map((item, i) => (
           <Reveal key={item.key} delay={i * 70}>
-            <div className="flex flex-col gap-4 py-5 sm:flex-row sm:gap-5">
+            <div className="group flex flex-col gap-4 py-5 sm:flex-row sm:gap-5">
               <Link
                 to={item.to}
-                className="aspect-[16/10] w-full shrink-0 overflow-hidden rounded-sm border border-line bg-white sm:aspect-auto sm:h-24 sm:w-32"
+                className="aspect-[16/10] w-full shrink-0 overflow-hidden rounded-sm border border-line bg-white transition-colors duration-200 hover:border-accent-500/50 focus-visible:border-accent-500/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 sm:aspect-auto sm:h-24 sm:w-32"
               >
-                <img src={item.cover} alt="" className="h-full w-full object-cover" />
+                <img src={item.cover} alt="" className="h-full w-full object-cover motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out motion-safe:group-hover:scale-[1.035] motion-safe:group-focus-within:scale-[1.035]" />
               </Link>
 
               <div className="min-w-0">
@@ -35,7 +35,7 @@ export default function Projects() {
                 </div>
                 <Link
                   to={item.to}
-                  className="mt-3 inline-block font-mono text-xs font-semibold text-accent-400 transition-colors hover:text-accent-300"
+                  className="mt-3 inline-block font-mono text-xs font-semibold text-accent-400 transition-[color,transform] duration-200 hover:text-accent-300 motion-safe:hover:translate-x-1 motion-safe:focus-visible:translate-x-1"
                 >
                   Read the case study →
                 </Link>

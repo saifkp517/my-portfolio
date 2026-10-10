@@ -16,9 +16,10 @@ export default function TechIcon({ slug, color, className = 'h-3.5 w-3.5' }) {
       </svg>
     )
   }
+  const src = slug.startsWith('/') ? slug : `https://cdn.simpleicons.org/${slug}/${color.replace('#', '')}`
   return (
     <img
-      src={`https://cdn.simpleicons.org/${slug}/${color.replace('#', '')}`}
+      src={src}
       alt=""
       className={`${className} object-contain`}
     />

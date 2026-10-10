@@ -1,12 +1,8 @@
 import Reveal from './Reveal.jsx'
-import { CORE_STACK } from '../data/coreStack.js'
-
-const STACK_NAMES = CORE_STACK.map((t) => t.name)
-const STACK_TEXT = `${STACK_NAMES.slice(0, -1).join(', ')} and ${STACK_NAMES[STACK_NAMES.length - 1]}`
 
 const BULLETS = [
-  'I ship real-time systems, web games and production business software.',
-  `Core stack: ${STACK_TEXT}.`,
+  'Full-stack developer building real-time products, business software, and AI features.',
+  'Open to software engineering roles and freelance projects.',
 ]
 
 export default function About() {

@@ -14,12 +14,13 @@ const roles = [
     end: '∞',
     duration: '1y',
     bullets: [
-      'Rescued a stalled e-commerce backend (Medusa/Node.js), shipping it to production in 4 months.',
-      'Fixed Vercel serverless timeouts by migrating the backend to a self-managed VPS in 3 days.',
-      'Built a RAG support/sales bot with Python, LlamaIndex and the OpenAI API.',
-      'Shipped a PostHog → PostgreSQL → GrowthBook analytics pipeline in 1.5 weeks.',
+      'Took ownership of a stalled Medusa/Node.js backend, fixed data sync issues, and shipped the product in 4 months.',
+      'Diagnosed CRM sync failures across serverless timeouts and database permissions; moved the backend to a VPS and migrated the database with zero data loss.',
+      'Served as the primary technical contact, turning client requirements into priorities and shipping features independently.',
+      'Built a RAG bot handling 100+ customer queries/month and a Next.js dashboard for staff to deploy bots without engineering help.',
+      'Shipped a PostHog → PostgreSQL → GrowthBook analytics pipeline in 1.5 weeks so marketing could run experiments independently.',
     ],
-    tags: ['Node.js', 'Medusa', 'Vercel', 'Linux/VPS', 'Python', 'LlamaIndex', 'GrowthBook'],
+    tags: ['Node.js', 'Medusa', 'Linux/VPS', 'Next.js', 'Python', 'LlamaIndex', 'OpenAI', 'GrowthBook'],
   },
   {
     company: 'Automate Accounts',
@@ -32,9 +33,9 @@ const roles = [
     end: '05.2025',
     duration: '6m',
     bullets: [
-      'Synced Zoho CRM records into MongoDB for auditability across 3 apps.',
+      'Synced Zoho CRM contacts, leads, and invoices into MongoDB for 3 downstream apps.',
       'Automated report generation and record cleanup via CRM webhooks and cron jobs.',
-      'Automated 10+ manual logging workflows with Zoho Flow.',
+      'Replaced 10+ manual logging workflows with Zoho Flow, saving 10+ hours/week of data entry.',
     ],
     tags: ['Zoho CRM', 'MongoDB', 'Webhooks', 'Zoho Flow'],
   },
@@ -78,6 +79,7 @@ function ExperienceRow({ item, defaultOpen }) {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
         className="mt-3 flex w-full items-center justify-between gap-4 text-left"
       >
         <div className="flex min-w-0 items-center gap-2">
@@ -96,7 +98,7 @@ function ExperienceRow({ item, defaultOpen }) {
             viewBox="0 0 16 16"
             fill="none"
             aria-hidden="true"
-            className={`shrink-0 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+            className={`shrink-0 transition-transform duration-200 ease-out motion-reduce:transition-none ${open ? 'rotate-180' : ''}`}
           >
             <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
@@ -107,7 +109,7 @@ function ExperienceRow({ item, defaultOpen }) {
       </p>
 
       <div
-        className={`grid transition-all duration-300 ease-out ${
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
           open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
         }`}
       >

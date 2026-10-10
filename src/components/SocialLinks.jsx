@@ -20,7 +20,20 @@ const LINKS = [
       <path
         d="M4.75 6.25v6.25M4.75 3.75v.01M7.75 12.5V6.25M7.75 8.75c0-1.4.85-2.5 2.1-2.5 1.2 0 1.9.85 1.9 2.5v3.75"
         stroke="currentColor"
-        strokeWidth="1.4"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    ),
+  },
+  {
+    label: 'X',
+    href: 'https://x.com/saifkhan501721',
+    icon: (
+      <path
+        d="M2.5 2h2.3l8.7 12h-2.3L2.5 2zm11 0L2.5 14"
+        stroke="currentColor"
+        strokeWidth="1.3"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

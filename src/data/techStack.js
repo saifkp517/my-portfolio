@@ -2,10 +2,8 @@
 // spec sheet would group them. CORE_STACK (coreStack.js) is the short list
 // named in the hero bio; this is the complete set.
 //
-// `color` is each technology's official brand color (so the icon renders in
-// its real identity, not a generic tint). Next.js's brand mark is pure black
-// and WebSockets has no official logo/color at all — both are lightened to
-// near-white/a palette tone so they stay visible on the dark background.
+// `color` follows each technology's brand where it stays legible on this dark
+// background. Marks without a usable brand icon use TechIcon's generic glyph.
 export const STACK_CATEGORIES = [
   {
     label: '01 Language',
@@ -13,11 +11,15 @@ export const STACK_CATEGORIES = [
   },
   {
     label: '02 Frontend',
-    items: [{ name: 'Next.js', slug: 'nextdotjs', color: '#F5F5F5' }],
+    items: [
+      { name: 'React', slug: 'react', color: '#61DAFB' },
+      { name: 'Next.js', slug: 'nextdotjs', color: '#F5F5F5' },
+    ],
   },
   {
     label: '03 Backend',
     items: [
+      { name: 'Node.js', slug: 'nodedotjs', color: '#83CD29' },
       { name: 'NestJS', slug: 'nestjs', color: '#E0234E' },
       { name: 'WebSockets', slug: null, color: '#818CF8' },
     ],
@@ -29,6 +31,23 @@ export const STACK_CATEGORIES = [
       { name: 'Redis', slug: 'redis', color: '#FF4438' },
       { name: 'TypeORM', slug: 'typeorm', color: '#FE0803' },
       { name: 'Supabase', slug: 'supabase', color: '#3FCF8E' },
+    ],
+  },
+  {
+    label: '05 AI',
+    items: [
+      { name: 'LlamaIndex', slug: null, color: '#C8C4F7' },
+      { name: 'OpenAI', slug: '/images/openai-logo-white.svg', color: '#F5F5F5' },
+      { name: 'Pinecone', slug: null, color: '#A7E3D5' },
+    ],
+  },
+  {
+    label: '06 Infra',
+    items: [
+      { name: 'Docker', slug: 'docker', color: '#2496ED' },
+      { name: 'Linux/VPS', slug: 'linux', color: '#FCC624' },
+      { name: 'Nginx', slug: 'nginx', color: '#59B955' },
+      { name: 'GitHub Actions', slug: 'githubactions', color: '#6DA7FF' },
     ],
   },
 ]

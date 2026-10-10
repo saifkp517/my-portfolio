@@ -104,22 +104,22 @@ export default function Hero() {
   return (
     <section id="top" className="flex flex-col">
       {/* Row A — Cover: Dither background (replaces the old Zentra screenshot) */}
-      <div className="relative h-[clamp(180px,28vh,280px)] overflow-hidden bg-ink">
+      <div className="relative h-[clamp(180px,28vh,280px)] overflow-hidden bg-ink sm:h-[clamp(300px,38vh,400px)]">
         <HeroCover />
       </div>
 
       <FullBleedRule />
 
       {/* Row B — Identity */}
-      <div className="flex items-stretch px-5 sm:px-6">
-        <div className="flex h-16 w-16 shrink-0 border-r border-line sm:h-24 sm:w-24">
+      <div className="hero-enter flex items-center px-5 sm:px-6">
+        <div className="flex h-16 w-16 shrink-0 border-r border-line">
           <img
             src="/images/avatar.png"
             alt="Saifullah Khan"
             className="h-full w-full bg-white object-cover"
           />
         </div>
-        <div className="flex min-w-0 flex-1 flex-col justify-center pl-3 py-3 sm:pl-5">
+        <div className="flex min-w-0 flex-1 flex-col justify-center pl-3 py-3 sm:pl-5 sm:py-2">
           <h1 className="flex items-center gap-2 font-body text-xl font-medium leading-tight tracking-tight text-white sm:text-[32px]">
             Saifullah Khan
             <span
@@ -138,14 +138,14 @@ export default function Hero() {
       <FullBleedRule />
 
       {/* Row C — Social icons */}
-      <div className="px-5 py-3 sm:px-6">
+      <div className="hero-enter px-5 py-3 sm:px-6" style={{ animationDelay: '70ms' }}>
         <SocialLinks size="sm" />
       </div>
 
       <FullBleedRule />
 
       {/* Row D — Meta grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2">
+      <div className="hero-enter grid grid-cols-1 sm:grid-cols-2" style={{ animationDelay: '130ms' }}>
         <MetaRow icon={ICONS.role} color={META_COLORS.role} rightBorder>
           Full-stack developer
         </MetaRow>
@@ -171,7 +171,7 @@ export default function Hero() {
       <FullBleedRule />
 
       {/* Row E — CTA */}
-      <div className="px-5 py-4 sm:px-6">
+      <div className="hero-enter px-5 py-4 sm:px-6" style={{ animationDelay: '190ms' }}>
         <div className="flex flex-wrap items-center gap-3">
           <CTAButton href="https://zentra-io.vercel.app/" variant="primary">
             Play Zentra

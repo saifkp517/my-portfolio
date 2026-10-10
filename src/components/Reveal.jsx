@@ -23,7 +23,7 @@ export default function Reveal({ children, className = '', delay = 0, as: Tag = 
   return (
     <Tag
       ref={ref}
-      className={`${className} ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} transition-all duration-700 ease-out`}
+      className={`reveal ${className} ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'} transition-[opacity,transform] duration-[480ms] ease-out`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
