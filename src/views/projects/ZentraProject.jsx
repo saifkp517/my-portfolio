@@ -1,5 +1,6 @@
-import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+'use client'
+
+import Link from 'next/link'
 import Chip from '../../components/Chip.jsx'
 import CTAButton from '../../components/CTAButton.jsx'
 import Reveal from '../../components/Reveal.jsx'
@@ -23,14 +24,6 @@ const deepDives = [
 ]
 
 export default function ZentraProject() {
-  useEffect(() => {
-    const previous = document.title
-    document.title = 'Zentra — Saifullah Khan'
-    return () => {
-      document.title = previous
-    }
-  }, [])
-
   return (
     <div className="min-h-screen bg-ink">
       <ProjectHeader />
@@ -118,7 +111,7 @@ export default function ZentraProject() {
                     <div className="mt-2 border-t border-dashed border-white/15 pt-3">
                       <h4 className="text-balance font-display text-base font-semibold leading-snug tracking-tight text-white sm:text-lg">
                         {item.to ? (
-                          <Link to={item.to} className="transition-colors hover:text-accent-400">
+                          <Link href={item.to} className="transition-colors hover:text-accent-400">
                             {item.headline}
                           </Link>
                         ) : (
@@ -132,7 +125,7 @@ export default function ZentraProject() {
                           <>
                             For the full breakdown,{' '}
                             <Link
-                              to={item.to}
+                              href={item.to}
                               className="text-accent-400 underline underline-offset-4 transition-colors hover:text-accent-300"
                             >
                               read the article
@@ -171,7 +164,7 @@ export default function ZentraProject() {
 
         <div className="mt-14 flex items-center justify-between border-t border-line pt-8 text-sm">
           <Link
-            to="/#projects"
+            href="/#projects"
             className="inline-flex items-center gap-2 font-mono text-xs text-white/50 transition-colors hover:text-accent-400"
           >
             ← Back to projects

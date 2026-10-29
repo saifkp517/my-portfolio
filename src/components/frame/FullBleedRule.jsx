@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react'
 // the viewport's center, since the column itself is `mx-auto`), so no
 // vw-based offset is needed either.
 export default function FullBleedRule({ className = '' }) {
-  const [width, setWidth] = useState(() => document.documentElement.clientWidth)
+  const [width, setWidth] = useState('100%')
 
   useEffect(() => {
     const update = () => setWidth(document.documentElement.clientWidth)

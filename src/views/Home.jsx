@@ -1,5 +1,6 @@
+'use client'
+
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import Nav from '../components/Nav.jsx'
 import Hero from '../components/Hero.jsx'
 import Activity from '../components/Activity.jsx'
@@ -14,13 +15,12 @@ import FullBleedRule from '../components/frame/FullBleedRule.jsx'
 import SectionDivider from '../components/frame/SectionDivider.jsx'
 
 export default function Home() {
-  const { hash } = useLocation()
-
   useEffect(() => {
+    const hash = window.location.hash
     if (!hash) return
-    const el = document.querySelector(hash)
+    const el = document.getElementById(decodeURIComponent(hash.slice(1)))
     if (el) el.scrollIntoView({ block: 'start' })
-  }, [hash])
+  }, [])
 
   return (
     <>

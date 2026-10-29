@@ -1,7 +1,7 @@
 import Reveal from './Reveal.jsx'
 
 const BULLETS = [
-  'Full-stack developer building real-time products, business software, and AI features.',
+  'Full-stack engineer building reliable software for real operational problems. I’ve shipped production applications, repaired data integrations, and built internal tools that make everyday work easier.',
   'Open to software engineering roles and freelance projects.',
 ]
 

@@ -9,12 +9,13 @@ const formatter = new Intl.DateTimeFormat('en-US', {
 })
 
 export default function LocalClock() {
-  const [time, setTime] = useState(() => formatter.format(new Date()))
+  const [time, setTime] = useState(null)
 
   useEffect(() => {
+    setTime(formatter.format(new Date()))
     const id = setInterval(() => setTime(formatter.format(new Date())), 30_000)
     return () => clearInterval(id)
   }, [])
 
-  return <span>{time} // IST</span>
+  return <span>{time ? `${time} // IST` : 'IST'}</span>
 }

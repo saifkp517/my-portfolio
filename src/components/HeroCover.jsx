@@ -1,9 +1,15 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react'
+'use client'
+
+import { useEffect, useRef, useState } from 'react'
+import dynamic from 'next/dynamic'
 import { hexToRgb01 } from '../lib/color.js'
 
 // Code-split: three.js + the fiber/postprocessing stack are heavy, so keep
 // them out of the main bundle until the hero actually needs to paint them.
-const Dither = lazy(() => import('./Dither.tsx'))
+const Dither = dynamic(() => import('./Dither.tsx'), {
+  ssr: false,
+  loading: () => <div className="absolute inset-0 bg-ink" />,
+})
 
 const ACCENT_HEX = '#36CE9E' // tailwind.config.js → colors.accent.500
 const INK_HEX = '#08090b' // tailwind.config.js → colors.ink
@@ -78,7 +84,6 @@ export default function HeroCover() {
 
   return (
     <div ref={containerRef} className="absolute inset-0">
-      <Suspense fallback={<div className="absolute inset-0 bg-ink" />}>
         <Dither
           waveColor={WAVE_COLOR}
           backgroundColor={BACKGROUND_COLOR}
@@ -92,7 +97,6 @@ export default function HeroCover() {
           dpr={isMobile ? 2 : 1.5}
           frameloop={inView ? 'always' : 'never'}
         />
-      </Suspense>
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-ink sm:h-20"

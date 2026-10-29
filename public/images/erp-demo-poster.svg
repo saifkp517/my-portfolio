@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">ERP workflow illustration</title><desc id="desc">Two factory records connect to one system and an owner dashboard.</desc>
+<rect width="1200" height="675" fill="#111b1a"/><path d="M0 540H1200M0 135H1200M240 0V675M960 0V675" stroke="#233b35" stroke-width="2"/>
+<text x="70" y="85" fill="#36ce9e" font-family="monospace" font-size="20" letter-spacing="4">THE WORKFLOW</text>
+<g fill="#172a26" stroke="#3d6b5e" stroke-width="2"><rect x="90" y="190" width="250" height="90" rx="8"/><rect x="90" y="350" width="250" height="90" rx="8"/><rect x="465" y="265" width="270" height="100" rx="8"/><rect x="860" y="265" width="250" height="100" rx="8"/></g>
+<g fill="#d7e9e2" font-family="monospace" font-size="23" text-anchor="middle"><text x="215" y="243">WATCHMAN</text><text x="215" y="403">SALES</text><text x="600" y="322">ONE SYSTEM</text><text x="985" y="322">DASHBOARD</text></g>
+<g fill="none" stroke="#36ce9e" stroke-width="3"><path d="M340 235H400V315H465M340 395H400V315M735 315H860"/><path d="M850 305l10 10-10 10"/></g>
+
+</svg>
+

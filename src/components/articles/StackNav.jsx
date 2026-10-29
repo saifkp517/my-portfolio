@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { stackItems } from '../../data/stack.js'
 
 // Bottom-of-article cross-links back into the rest of Zentra's stack, styled
@@ -43,7 +43,7 @@ export default function StackNav({ currentKey }) {
                   <h4 className="text-balance font-display text-base font-semibold leading-snug tracking-tight sm:text-lg">
                     {isLinkable ? (
                       <Link
-                        to={item.to}
+                        href={item.to}
                         className="text-neutral-900 transition-colors hover:text-accent-600 dark:text-white dark:hover:text-accent-400"
                       >
                         {item.headline}
@@ -61,7 +61,7 @@ export default function StackNav({ currentKey }) {
                       <>
                         For the full breakdown,{' '}
                         <Link
-                          to={item.to}
+                          href={item.to}
                           className="text-accent-600 underline underline-offset-4 transition-colors hover:text-accent-700 dark:text-accent-400 dark:hover:text-accent-300"
                         >
                           read the article

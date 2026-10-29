@@ -208,6 +208,7 @@ function DitheredWaves({
   mouseRadius,
 }: DitheredWavesProps) {
   const mesh = useRef<THREE.Mesh>(null)
+  const material = useRef<THREE.ShaderMaterial>(null)
   const mouseRef = useRef(new THREE.Vector2())
   const { viewport, size, gl } = useThree()
 
@@ -228,7 +229,8 @@ function DitheredWaves({
     const dpr = gl.getPixelRatio()
     const w = Math.floor(size.width * dpr)
     const h = Math.floor(size.height * dpr)
-    const res = waveUniformsRef.current.resolution.value
+    const res = material.current?.uniforms.resolution.value
+    if (!res) return
     if (res.x !== w || res.y !== h) {
       res.set(w, h)
     }
@@ -238,7 +240,8 @@ function DitheredWaves({
   const prevBackgroundColor = useRef<RGB>([...backgroundColor])
 
   useFrame(({ clock }) => {
-    const u = waveUniformsRef.current
+    const u = material.current?.uniforms
+    if (!u) return
 
     if (!disableAnimation) {
       u.time.value = clock.getElapsedTime()
@@ -278,6 +281,7 @@ function DitheredWaves({
       <mesh ref={mesh} scale={[viewport.width, viewport.height, 1]}>
         <planeGeometry args={[1, 1]} />
         <shaderMaterial
+          ref={material}
           vertexShader={waveVertexShader}
           fragmentShader={waveFragmentShader}
           uniforms={waveUniformsRef.current}

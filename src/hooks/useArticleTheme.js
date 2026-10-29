@@ -2,20 +2,19 @@ import { useEffect, useState } from 'react'
 
 const STORAGE_KEY = 'article-theme'
 
-function getInitialTheme() {
-  try {
-    const stored = window.localStorage.getItem(STORAGE_KEY)
-    if (stored === 'light' || stored === 'dark') return stored
-  } catch {
-    // localStorage unavailable (private mode, etc.) — fall through to default
-  }
-  return 'dark'
-}
-
 // Scoped light/dark toggle for the article reading experience. Persists the
 // reader's choice locally; defaults to dark to match the rest of the site.
 export default function useArticleTheme() {
-  const [theme, setTheme] = useState(getInitialTheme)
+  const [theme, setTheme] = useState('dark')
+
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(STORAGE_KEY)
+      if (stored === 'light' || stored === 'dark') setTheme(stored)
+    } catch {
+      // localStorage may be unavailable.
+    }
+  }, [])
 
   useEffect(() => {
     try {
