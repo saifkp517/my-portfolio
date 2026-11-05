@@ -29,7 +29,7 @@ export default function Home() {
           <Hero />
           <SectionDivider />
           <Activity />
-          <FullBleedRule />
+          <SectionDivider />
           <Projects />
           <SectionDivider />
           <Experience />

@@ -7,7 +7,10 @@
 export const STACK_CATEGORIES = [
   {
     label: '01 Language',
-    items: [{ name: 'TypeScript', slug: 'typescript', color: '#3178C6' }],
+    items: [
+      { name: 'TypeScript', slug: 'typescript', color: '#3178C6' },
+      { name: 'Python', slug: 'python', color: '#FFD43B' },
+    ],
   },
   {
     label: '02 Frontend',

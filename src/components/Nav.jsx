@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 import PixelLogo from './PixelLogo.jsx'
 
 const sections = [
-  { id: 'projects', label: 'Projects' },
+  { id: 'top', label: 'About' },
+  { id: 'projects', label: 'Projects & Writing' },
   { id: 'experience', label: 'Experience' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'stack', label: 'Stack' },
 ]
 
 export default function Nav() {
@@ -15,10 +16,18 @@ export default function Nav() {
     const update = () => {
       frame = 0
       const readingLine = window.innerHeight * 0.35
-      const active = sections.reduce((current, { id }) => {
-        const section = document.getElementById(id)
-        return section && section.getBoundingClientRect().top <= readingLine ? id : current
-      }, null)
+      // The page ends before the last section can reach the reading line, so
+      // pin the first item at the very top and the last item at the very bottom.
+      const atTop = window.scrollY < 4
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4
+      const active = atTop
+        ? sections[0].id
+        : atBottom
+          ? sections[sections.length - 1].id
+          : sections.reduce((current, { id }) => {
+              const section = document.getElementById(id)
+              return section && section.getBoundingClientRect().top <= readingLine ? id : current
+            }, null)
       setActiveSection(active)
     }
     const schedule = () => {
@@ -37,7 +46,7 @@ export default function Nav() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-ink/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-3xl items-center justify-between border-x border-line px-5 py-4 sm:px-6">
+      <div className="mx-auto flex max-w-none md:max-w-4xl 2xl:max-w-5xl items-center justify-between border-x border-line px-5 py-4 sm:px-6">
         <a
           href="#top"
           aria-label="Saifullah Khan — home"

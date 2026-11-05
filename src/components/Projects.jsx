@@ -52,19 +52,19 @@ export default function Projects() {
         </div>
       </Reveal>
 
-      <div className="mt-6 divide-y divide-line border-y border-line">
+      <div className="mt-6 divide-y divide-line border-y border-line md:grid md:grid-cols-2 md:divide-x md:divide-y-0">
         {projects.map((item, i) => {
           const articles = postsFor(item.key)
           const shown = articles.slice(0, MAX_SHOWN)
           const hidden = articles.length - shown.length
           const hasOverview = articles.every((a) => a.to !== item.to)
           return (
-            <Reveal key={item.key} delay={i * 70}>
+            <Reveal key={item.key} delay={i * 70} className="md:px-5 md:first:pl-0 md:last:pr-0">
               <article className="py-6">
                 <ProjectMedia item={item} />
 
                 <div className="mt-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <h3 className="text-balance font-display text-lg font-semibold leading-snug tracking-tight text-white sm:text-xl">
+                  <h3 className="text-balance font-display text-lg font-semibold leading-snug tracking-tight text-white sm:text-xl md:text-base">
                     <Link href={item.to} className="transition-colors hover:text-accent-400">
                       {item.title}
                     </Link>
@@ -78,7 +78,7 @@ export default function Projects() {
                     </Link>
                   )}
                 </div>
-                <p className="mt-1.5 text-sm leading-relaxed text-white/65">{item.tagline}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-white/65 md:text-[13px]">{item.tagline}</p>
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {item.tags.map((t) => (
                     <Chip key={t}>{t}</Chip>
