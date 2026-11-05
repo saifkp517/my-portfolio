@@ -2,16 +2,16 @@ import './globals.css'
 
 export const metadata = {
   title: {
-    default: 'Saifullah Khan — Full-stack developer',
+    default: 'Saifullah Khan — Backend-leaning engineer',
     template: '%s — Saifullah Khan',
   },
   description:
-    'Full-stack developer who ships real-time systems, web games and production business software. TypeScript, NestJS, PostgreSQL, Redis, WebSockets.',
+    'Backend-leaning engineer building real-time systems and production business software. TypeScript, NestJS, PostgreSQL, Redis, WebSockets.',
   openGraph: {
     type: 'website',
-    title: 'Saifullah Khan — Full-stack developer',
+    title: 'Saifullah Khan — Backend-leaning engineer',
     description:
-      'I ship real-time systems, web games and production business software. Play Zentra, a multiplayer shooter I built, or see how I cut a 4–6 hour audit to 20 minutes.',
+      'I build real-time backends and the systems businesses run on. Read how I built a multiplayer game server, or how I cut a 4–6 hour audit to 20 minutes.',
   },
   twitter: { card: 'summary_large_image' },
   icons: { icon: '/favicon.svg' },

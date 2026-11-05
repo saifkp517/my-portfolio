@@ -111,15 +111,15 @@ export default function Hero() {
       <FullBleedRule />
 
       {/* Row B — Identity */}
-      <div className="hero-enter flex items-center px-5 sm:px-6">
-        <div className="flex h-16 w-16 shrink-0 border-r border-line">
+      <div className="hero-enter flex items-stretch">
+        <div className="flex h-20 w-20 shrink-0 border-r border-line sm:h-24 sm:w-24">
           <img
-            src="/images/avatar.png"
+            src="/images/avatar.jpg"
             alt="Saifullah Khan"
-            className="h-full w-full bg-white object-cover"
+            className="h-full w-full bg-ink object-cover"
           />
         </div>
-        <div className="flex min-w-0 flex-1 flex-col justify-center pl-3 py-3 sm:pl-5 sm:py-2">
+        <div className="flex min-w-0 flex-1 flex-col justify-center px-5 py-2 sm:px-6">
           <h1 className="flex items-center gap-2 font-body text-xl font-medium leading-tight tracking-tight text-white sm:text-[32px]">
             Saifullah Khan
             <span
@@ -130,7 +130,7 @@ export default function Hero() {
             />
           </h1>
           <p className="mt-1 truncate font-mono text-xs text-white/60">
-            I ship real-time systems, web games and business software.
+            I build real-time backends and the systems businesses run on.
           </p>
         </div>
       </div>
@@ -147,7 +147,7 @@ export default function Hero() {
       {/* Row D — Meta grid */}
       <div className="hero-enter grid grid-cols-1 sm:grid-cols-2" style={{ animationDelay: '130ms' }}>
         <MetaRow icon={ICONS.role} color={META_COLORS.role} rightBorder>
-          Full-stack developer
+          Backend-leaning engineer
         </MetaRow>
         <MetaRow icon={ICONS.stack} color={META_COLORS.stack}>
           {STACK_TEXT}

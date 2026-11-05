@@ -7,12 +7,13 @@ import useActiveSection from '../../hooks/useActiveSection.js'
 import ThemeToggle from './ThemeToggle.jsx'
 import ReadingProgress from './ReadingProgress.jsx'
 import { ArticleTOCMobile, ArticleTOCDesktop } from './ArticleTOC.jsx'
-import StackNav from './StackNav.jsx'
+import SeriesNav from './SeriesNav.jsx'
+import { posts, getProject, postsFor } from '../../data/posts.js'
 import { ArrowLeftIcon } from './icons.jsx'
 
 export default function ArticleLayout({
   stackKey,
-  eyebrow = "Zentra — under the hood",
+  eyebrow,
   title,
   dek,
   icon,
@@ -28,6 +29,13 @@ export default function ArticleLayout({
   const ids = useMemo(() => sections.map((s) => s.id), [sections])
   const activeId = useActiveSection(ids)
 
+  const post = posts.find((p) => p.key === stackKey)
+  const project = post && getProject(post.project)
+  const backHref = project?.to ?? '/#projects'
+  const backLabel = project?.title ?? 'projects'
+  const eyebrowText =
+    eyebrow ?? (project ? `${project.title} · part ${post.part} of ${postsFor(project.key).length}` : '')
+
   return (
     <div className={theme === 'dark' ? 'dark' : ''}>
       <div className="min-h-screen bg-white font-body text-neutral-900 transition-colors duration-300 dark:bg-ink dark:text-white">
@@ -36,11 +44,11 @@ export default function ArticleLayout({
         <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white/85 backdrop-blur-md dark:border-line dark:bg-ink/85">
           <div className="mx-auto flex max-w-content items-center justify-between gap-4 px-5 py-4 sm:px-8">
             <Link
-              href="/projects/zentra"
+              href={backHref}
               className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-neutral-500 transition-colors hover:text-accent-600 dark:text-white/50 dark:hover:text-accent-400"
             >
               <ArrowLeftIcon />
-              Back to Zentra
+              Back to {backLabel}
             </Link>
             <ThemeToggle theme={theme} onToggle={toggleTheme} />
           </div>
@@ -50,7 +58,7 @@ export default function ArticleLayout({
           <div className="lg:grid lg:grid-cols-[1fr_216px] lg:items-start lg:gap-12">
             <div className="min-w-0">
               <p className="font-mono text-xs uppercase tracking-widest text-accent-600 dark:text-accent-400">
-                {eyebrow}
+                {eyebrowText}
               </p>
 
               <div className="mt-4 flex items-start gap-3 sm:items-center">
@@ -99,24 +107,26 @@ export default function ArticleLayout({
 
               <article>{children}</article>
 
-              <StackNav currentKey={stackKey} />
+              <SeriesNav currentKey={stackKey} />
 
               <div className="mt-14 flex flex-col gap-4 border-t border-neutral-200 pt-8 text-sm dark:border-line sm:flex-row sm:items-center sm:justify-between">
                 <Link
-                  href="/projects/zentra"
+                  href={backHref}
                   className="inline-flex items-center gap-2 font-mono text-xs text-neutral-500 transition-colors hover:text-accent-600 dark:text-white/50 dark:hover:text-accent-400"
                 >
                   <ArrowLeftIcon />
-                  Back to Zentra
+                  Back to {backLabel}
                 </Link>
+                {project?.live && (
                 <a
-                  href="https://zentra-io.vercel.app/"
+                  href={project.live}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-2 font-mono text-xs font-semibold text-accent-600 transition-colors hover:text-accent-700 dark:text-accent-400 dark:hover:text-accent-300"
                 >
-                  Play Zentra ↗
+                  Play {project.title} ↗
                 </a>
+                )}
               </div>
             </div>
 

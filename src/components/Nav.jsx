@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import PixelLogo from './PixelLogo.jsx'
 
 const sections = [
-  { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
+  { id: 'experience', label: 'Experience' },
   { id: 'contact', label: 'Contact' },
 ]
 
@@ -37,7 +37,7 @@ export default function Nav() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-ink/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-5xl items-center justify-between border-x border-line px-5 py-4 sm:px-6">
+      <div className="mx-auto flex max-w-3xl items-center justify-between border-x border-line px-5 py-4 sm:px-6">
         <a
           href="#top"
           aria-label="Saifullah Khan — home"
@@ -49,7 +49,7 @@ export default function Nav() {
           {sections.map(({ id, label }) => (
             <a
               key={id}
-              href={`#${id}`}
+              href={`/#${id}`}
               aria-current={activeSection === id ? 'location' : undefined}
               className={`group relative rounded-sm transition-colors hover:text-accent-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink ${activeSection === id ? 'text-accent-400' : ''}`}
             >

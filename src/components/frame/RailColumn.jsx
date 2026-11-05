@@ -5,6 +5,6 @@
 // what reads as one continuous pair of verticals down the page.
 export default function RailColumn({ as: Tag = 'div', className = '', children }) {
   return (
-    <Tag className={`mx-auto max-w-5xl border-x border-line ${className}`}>{children}</Tag>
+    <Tag className={`mx-auto max-w-3xl border-x border-line ${className}`}>{children}</Tag>
   )
 }

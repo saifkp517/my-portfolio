@@ -10,7 +10,7 @@ export default function Contact() {
       </Reveal>
       <Reveal delay={60}>
         <h2 className="mt-3 text-balance font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
-          Hiring for a full-stack or real-time role? Let's talk.
+          Hiring for a backend or real-time role? Let's talk.
         </h2>
       </Reveal>
 

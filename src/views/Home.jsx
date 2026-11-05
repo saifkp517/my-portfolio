@@ -4,7 +4,6 @@ import { useEffect } from 'react'
 import Nav from '../components/Nav.jsx'
 import Hero from '../components/Hero.jsx'
 import Activity from '../components/Activity.jsx'
-import About from '../components/About.jsx'
 import Stack from '../components/Stack.jsx'
 import Experience from '../components/Experience.jsx'
 import Projects from '../components/Projects.jsx'
@@ -31,13 +30,11 @@ export default function Home() {
           <SectionDivider />
           <Activity />
           <FullBleedRule />
-          <About />
-          <FullBleedRule />
-          <Stack />
+          <Projects />
           <SectionDivider />
           <Experience />
-          <FullBleedRule />
-          <Projects />
+          <SectionDivider />
+          <Stack />
           <SectionDivider />
           <Contact />
           <FullBleedRule />
