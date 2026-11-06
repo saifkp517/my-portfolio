@@ -11,6 +11,12 @@ export const META_COLORS = {
   phone: '#818CF8', // meta.indigo
 }
 
+// One tint per project, used for its tile on the home cards and article rows.
+export const PROJECT_COLORS = {
+  zentra: '#36CE9E', // accent.500
+  erp: '#38BDF8', // meta.sky
+}
+
 export const SOCIAL_COLORS = {
   GitHub: '#B8C4D0',
   LinkedIn: '#70B8F0',

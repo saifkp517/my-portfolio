@@ -4,24 +4,13 @@ import LocalClock from './LocalClock.jsx'
 import ObfuscatedPhone from './ObfuscatedPhone.jsx'
 import HeroCover from './HeroCover.jsx'
 import FullBleedRule from './frame/FullBleedRule.jsx'
+import MetaIconTile from './frame/MetaIconTile.jsx'
 import { CORE_STACK } from '../data/coreStack.js'
 import { projects } from '../data/projects.js'
 import { META_COLORS } from '../data/iconColors.js'
-import { hexToRgba } from '../lib/color.js'
 
 const STACK_TEXT = CORE_STACK.map((t) => t.name).join(' · ')
 const ZENTRA = projects.find((p) => p.key === 'zentra')
-
-function MetaIconTile({ children, color }) {
-  return (
-    <span
-      className="flex h-6 w-6 shrink-0 items-center justify-center rounded-sm border"
-      style={{ backgroundColor: hexToRgba(color, 0.11), borderColor: hexToRgba(color, 0.11), color }}
-    >
-      {children}
-    </span>
-  )
-}
 
 function MetaRow({ icon, color, children, rightBorder }) {
   return (
