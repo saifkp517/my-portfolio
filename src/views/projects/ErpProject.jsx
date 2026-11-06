@@ -160,6 +160,16 @@ export default function ErpProject() {
           cross-checks the records, flags mismatches, calculates performance and builds reports. The owner
           gets live Metabase dashboards.
         </ChangeBlock>
+        <figure className="border border-line">
+          <Image
+            src="/images/erp-demo-poster.svg"
+            alt="Watchman and sales records feed into one system, which powers the owner's dashboard"
+            width={1200}
+            height={675}
+            className="h-auto w-full"
+            sizes="(max-width: 1024px) 100vw, 768px"
+          />
+        </figure>
       </ReportSection>
 
       <ReportSection id="outcome" title="What it meant for the owner.">
