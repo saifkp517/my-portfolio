@@ -5,6 +5,12 @@ export default {
   turbopack: {
     root: process.cwd(),
   },
+  async redirects() {
+    return [
+      { source: '/articles/websockets', destination: '/projects/zentra', permanent: true },
+      { source: '/articles/redis', destination: '/projects/zentra', permanent: true },
+    ]
+  },
   // Reverse proxy for PostHog so ad/tracker blockers don't drop the requests.
   async rewrites() {
     return [

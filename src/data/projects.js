@@ -9,7 +9,7 @@ export const projects = [
     label: 'Zentra',
     color: PROJECT_COLORS.zentra,
     tagline: 'The real-time multiplayer backend behind a browser PVP game.',
-    tags: ['NestJS', 'WebSockets', 'Redis', 'PostgreSQL'],
+    tags: ['NestJS', 'socket.io', 'Redis', 'PostgreSQL'],
     cover: '/images/zentra-gameplay.webp',
     video: '/videos/zentra.mp4',
     to: '/projects/zentra',

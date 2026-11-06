@@ -1,185 +1,111 @@
 'use client'
 
-import Link from 'next/link'
-import Chip from '../../components/Chip.jsx'
 import CTAButton from '../../components/CTAButton.jsx'
-import Reveal from '../../components/Reveal.jsx'
-import Footer from '../../components/Footer.jsx'
-import ProjectHeader from '../../components/projects/ProjectHeader.jsx'
-import { stackItems } from '../../data/stack.js'
+import ReportLayout, { ReportSection, ReportTable } from '../../components/report/ReportLayout.jsx'
+import { META_COLORS } from '../../data/iconColors.js'
+import { projects } from '../../data/projects.js'
 
-const deepDives = [
-  {
-    title: 'The netcode',
-    desc: 'Real-time position sync, shooting, and keeping engagement.',
-  },
-  {
-    title: 'Keeping the FPS high',
-    desc: 'The tricks that stopped it turning into a slideshow.',
-  },
-  {
-    title: 'Filling empty lobbies',
-    desc: 'Bot architecture — how bots navigate terrain, aim, and feel human.',
-  },
+const ZENTRA = projects.find((p) => p.key === 'zentra')
+
+const PROPERTIES = [
+  { label: 'Status', value: 'Discontinued pet project', color: META_COLORS.time, d: 'M8 2.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM8 5v3.2' },
+  { label: 'Client', value: 'Next.js + React Three Fiber', color: META_COLORS.role, d: 'M2.5 3.5h11v7h-11v-7zM6 13.5h4' },
+  { label: 'Server', value: 'NestJS', color: META_COLORS.location, d: 'M3 3.5h10v3.5H3V3.5zM3 9h10v3.5H3V9z' },
+  { label: 'Realtime', value: 'socket.io', color: META_COLORS.email, d: 'M9 2L4 9h4l-1 5 5-7H8l1-5z' },
+  { label: 'Profile data', value: 'REST', color: META_COLORS.phone, d: 'M3 5h8.5M9 2.5L11.5 5 9 7.5M13 11H4.5M7 8.5L4.5 11 7 13.5' },
+  { label: 'Auth', value: 'Supabase', color: META_COLORS.stack, d: 'M4 7.5h8v6H4v-6zM5.5 7.5V5a2.5 2.5 0 015 0v2.5' },
+  { label: 'Match state', value: 'Redis', color: META_COLORS.location, d: 'M8 2.5l5.5 2.75L8 8 2.5 5.25 8 2.5zM2.5 8.75L8 11.5l5.5-2.75' },
+  { label: 'Lifetime stats', value: 'Postgres via TypeORM', color: META_COLORS.role, d: 'M3 13V9M8 13V3M13 13V6' },
 ]
+
+const SECTIONS = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'authority', label: 'Authority model' },
+  { id: 'state', label: 'Where state lives' },
+  { id: 'match', label: 'Match lifecycle' },
+  { id: 'status', label: 'Status' },
+]
+
+const STATE_ROWS = [
+  ['Hits and deaths', 'Server', 'Authoritative'],
+  ['Player position', 'Client', 'Reported every frame; the server stores and rebroadcasts it'],
+  ['Current match', 'Redis', 'Current match only'],
+  ['Lifetime kills, deaths, match counts', 'Postgres', 'Via TypeORM'],
+  ['Login', 'Supabase', 'Handles login'],
+]
+
+function Cover() {
+  return (
+    <div className="relative aspect-[21/9] overflow-hidden bg-ink">
+      <img
+        src={ZENTRA.cover}
+        alt="Zentra gameplay in a voxel forest"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-ink sm:h-20"
+      />
+    </div>
+  )
+}
 
 export default function ZentraProject() {
   return (
-    <div className="min-h-screen bg-ink">
-      <ProjectHeader />
-      <main className="mx-auto max-w-content px-5 py-14 sm:px-8 sm:py-20">
-        <Reveal>
-          <p className="font-mono text-xs uppercase tracking-widest text-accent-400">Project 1</p>
-        </Reveal>
-        <Reveal delay={60}>
-          <h1 className="mt-3 max-w-2xl text-balance font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
-            Zentra — a forest-based PVP shooter .io game
-          </h1>
-        </Reveal>
+    <ReportLayout
+      cover={<Cover />}
+      eyebrow="Project report"
+      title="Zentra"
+      status="Discontinued"
+      subtitle="A browser third-person arena shooter."
+      properties={PROPERTIES}
+      sections={SECTIONS}
+      action={
+        <>
+          <CTAButton href={ZENTRA.live} target="_blank" rel="noreferrer" variant="secondary">
+            Play Zentra
+          </CTAButton>
+          <CTAButton href="https://github.com/saifkp517/vynix" target="_blank" rel="noreferrer" variant="secondary">
+            View on GitHub
+          </CTAButton>
+          <p className="font-mono text-xs text-white/55">Pet project. Discontinued, no further development.</p>
+        </>
+      }
+    >
+      <ReportSection id="overview" title="Overview">
+        <p>
+          Zentra is a browser third-person arena shooter. A Next.js + React Three Fiber client renders a
+          forest map. A NestJS server runs the match. The two talk over one socket.io connection for
+          everything real-time, and over REST for durable profile data. Supabase handles login. Redis
+          holds only the current match. Postgres (via TypeORM) holds only lifetime kills, deaths and
+          match counts.
+        </p>
+      </ReportSection>
 
-        <Reveal delay={100} className="mt-4 flex flex-wrap gap-2">
-          {['NestJS', 'WebSockets', 'Redis', 'PostgreSQL'].map((s) => (
-            <Chip key={s}>{s}</Chip>
-          ))}
-        </Reveal>
+      <ReportSection id="authority" title="Authority model">
+        <p>
+          The server is authoritative about who got hit and whether they died. It is not authoritative
+          about where players are: the client reports its position every frame and the server stores and
+          rebroadcasts it. Shots are hit-tested on the server, rewound slightly for the shooter, and can
+          be vetoed by terrain and trees. Bots are ordinary player records driven by the same movement
+          and combat functions a socket would call. The client has no bot-specific code.
+        </p>
+      </ReportSection>
 
-        {/* Play + screenshot */}
-        <Reveal delay={140}>
-          <div className="group relative mt-10 overflow-hidden rounded-2xl border border-line bg-panel">
-            <div className="flex items-center justify-center bg-white">
-              <img
-                src="/images/zentra-gameplay.webp"
-                alt="Zentra gameplay screenshot showing voxel forest with player character"
-                className="h-auto w-full"
-              />
-            </div>
-            <div className="absolute inset-x-0 bottom-0 flex translate-y-full flex-col items-start gap-4 border-t border-line bg-panel/95 p-6 backdrop-blur-sm transition-transform duration-300 ease-out group-hover:translate-y-0 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm text-white/60">Play it in the browser — no signup.</p>
-              <CTAButton href="https://zentra-io.vercel.app/" variant="primary">
-                Play now
-              </CTAButton>
-            </div>
-          </div>
-        </Reveal>
+      <ReportSection id="state" title="Where state lives">
+        <ReportTable columns={['State', 'Owner', 'Notes']} rows={STATE_ROWS} />
+      </ReportSection>
 
-        {/* Story */}
-        <Reveal delay={180}>
-          <p className="mt-10 text-balance font-display text-lg font-medium text-accent-400">
-            I didn't have a startup idea, so I built a game.
-          </p>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/65">
-            Games are the lowest-friction way to get users. Nobody signs up for a CRUD app for fun,
-            but they'll click PLAY.
-          </p>
-        </Reveal>
+      <ReportSection id="match" title="Match lifecycle">
+        <p>
+          A match lasts 10 minutes. A new room starts with five bots, and later players join the existing
+          room, so a match is a rolling world rather than a fixed lobby.
+        </p>
+      </ReportSection>
 
-        <Reveal delay={220}>
-          <p className="mt-6 max-w-2xl text-sm leading-relaxed text-white/70">
-            You're a sphere, rolling around noisy, uneven terrain while pixelated rain falls.
-            Everyone has a gun and the highest score wins. Canopies work as cover or ambush spots,
-            enemy radar reveals positions, and you can trigger temporary invincibility mid-fight.
-          </p>
-        </Reveal>
-
-        {/* Architecture breakdown */}
-        <div className="mt-14">
-          <Reveal>
-            <h3 className="font-mono text-xs uppercase tracking-widest text-white/40">
-              Under the hood
-            </h3>
-          </Reveal>
-          <div className="mt-6 divide-y divide-line rounded-xl border border-line bg-panel">
-            {stackItems.map((item, i) => (
-              <Reveal key={item.key} delay={i * 70}>
-                <div className="flex flex-col gap-4 p-5 sm:flex-row sm:gap-5 sm:p-6">
-                  <div className="aspect-[16/10] w-full shrink-0 overflow-hidden rounded-lg border border-line bg-white/[0.03] sm:aspect-auto sm:h-24 sm:w-32">
-                    {item.cover ? (
-                      <img src={item.cover} alt="" className="h-full w-full object-cover" />
-                    ) : (
-                      <div className="flex h-full w-full items-center justify-center p-1.5">
-                        <span className="text-center font-mono text-[8px] uppercase leading-tight tracking-wide text-white/25">
-                          Add cover image
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="min-w-0">
-                    <p className="font-mono text-[10px] uppercase tracking-widest text-white/35">
-                      Under the hood / {item.to ? 'Published' : 'Coming soon'}
-                    </p>
-                    <div className="mt-2 border-t border-dashed border-white/15 pt-3">
-                      <h4 className="text-balance font-display text-base font-semibold leading-snug tracking-tight text-white sm:text-lg">
-                        {item.to ? (
-                          <Link href={item.to} className="transition-colors hover:text-accent-400">
-                            {item.headline}
-                          </Link>
-                        ) : (
-                          item.headline
-                        )}
-                      </h4>
-                      <p className="mt-1 font-mono text-xs italic text-white/40">{item.part}</p>
-                      <p className="mt-3 text-sm leading-relaxed text-white/65">
-                        {item.role}{' '}
-                        {item.to && (
-                          <>
-                            For the full breakdown,{' '}
-                            <Link
-                              href={item.to}
-                              className="text-accent-400 underline underline-offset-4 transition-colors hover:text-accent-300"
-                            >
-                              read the article
-                            </Link>
-                            .
-                          </>
-                        )}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-
-        {/* Deep dives teaser */}
-        <Reveal delay={100}>
-          <div className="mt-14 rounded-xl border border-dashed border-white/15 p-6">
-            <p className="font-mono text-xs uppercase tracking-widest text-white/40">
-              Deep dives coming
-            </p>
-            <ul className="mt-4 space-y-3">
-              {deepDives.map((d) => (
-                <li key={d.title} className="flex items-start gap-3 text-sm text-white/65">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-500/60" />
-                  <span>
-                    <span className="font-medium text-white/85">{d.title}</span> — {d.desc}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-4 font-mono text-[11px] text-white/35">Not published yet.</p>
-          </div>
-        </Reveal>
-
-        <div className="mt-14 flex items-center justify-between border-t border-line pt-8 text-sm">
-          <Link
-            href="/#projects"
-            className="inline-flex items-center gap-2 font-mono text-xs text-white/50 transition-colors hover:text-accent-400"
-          >
-            ← Back to projects
-          </Link>
-          <a
-            href="https://zentra-io.vercel.app/"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 font-mono text-xs font-semibold text-accent-400 transition-colors hover:text-accent-300"
-          >
-            Play Zentra ↗
-          </a>
-        </div>
-      </main>
-      <Footer />
-    </div>
+      <ReportSection id="status" title="Status">
+        <p>Zentra was a pet project and is discontinued from further development.</p>
+      </ReportSection>
+    </ReportLayout>
   )
 }

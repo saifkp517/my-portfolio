@@ -1,11 +1,12 @@
 import Link from 'next/link'
 import PixelLogo from '../PixelLogo.jsx'
-import { ArrowLeftIcon } from '../articles/icons.jsx'
+import { ArrowLeftIcon } from './icons.jsx'
 
+// Lines up with the home page's RailColumn.
 export default function ProjectHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-ink/85 backdrop-blur-md">
-      <div className="mx-auto flex max-w-content items-center justify-between px-5 py-4 sm:px-8">
+      <div className="mx-auto flex max-w-none items-center justify-between border-x border-line px-5 py-4 sm:px-6 md:max-w-4xl 2xl:max-w-5xl">
         <Link
           href="/#projects"
           className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-white/50 transition-colors hover:text-accent-400"

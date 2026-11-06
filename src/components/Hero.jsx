@@ -3,27 +3,14 @@ import SocialLinks from './SocialLinks.jsx'
 import LocalClock from './LocalClock.jsx'
 import ObfuscatedPhone from './ObfuscatedPhone.jsx'
 import HeroCover from './HeroCover.jsx'
+import MetaRow from './MetaRow.jsx'
 import FullBleedRule from './frame/FullBleedRule.jsx'
-import MetaIconTile from './frame/MetaIconTile.jsx'
 import { CORE_STACK } from '../data/coreStack.js'
 import { projects } from '../data/projects.js'
 import { META_COLORS } from '../data/iconColors.js'
 
 const STACK_TEXT = CORE_STACK.map((t) => t.name).join(' · ')
 const ZENTRA = projects.find((p) => p.key === 'zentra')
-
-function MetaRow({ icon, color, children, rightBorder }) {
-  return (
-    <div
-      className={`flex items-center gap-2.5 border-b border-line px-5 py-3 sm:px-6 ${
-        rightBorder ? 'sm:border-r' : ''
-      }`}
-    >
-      <MetaIconTile color={color}>{icon}</MetaIconTile>
-      <span className="min-w-0 truncate font-mono text-sm text-white/75">{children}</span>
-    </div>
-  )
-}
 
 const ICONS = {
   role: (

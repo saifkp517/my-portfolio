@@ -75,15 +75,15 @@ export default function Projects() {
             <Reveal
               key={item.key}
               delay={i * 70}
-              className="border-b border-line last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0"
+              className="flex border-b border-line last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0"
             >
-              <article>
+              <article className="flex w-full min-w-0 flex-col">
                 <ProjectMedia item={item} />
 
                 {/* The whole info block is one link to the project's page. */}
                 <Link
                   href={item.to}
-                  className="group block px-5 py-4 transition-colors hover:bg-white/[0.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-500 sm:px-6"
+                  className="group block flex-1 px-5 py-4 transition-colors hover:bg-white/[0.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-500 sm:px-6"
                 >
                   <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
                     <div className="flex min-w-0 items-center gap-2.5">
