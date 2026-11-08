@@ -1,11 +1,10 @@
 // Every post belongs to a project. A post's `project` is the key of an entry
-// in projects.js; `part` is its reading order inside that project. A post's
-// URL is derived, never hand-written: the project's own report has no `slug`
-// and lives at /projects/<project>; any other article lives at
-// /projects/<project>/<slug>.
+// in projects.js; `part` is its reading order inside that project. `to` is the
+// route itself: the project's report is src/app/projects/<project>/page.jsx and
+// each article is a page nested under it, src/app/projects/<project>/<slug>/page.jsx.
 import { projects } from './projects.js'
 
-const rawPosts = [
+export const posts = [
   {
     key: 'zentra',
     project: 'zentra',
@@ -13,6 +12,7 @@ const rawPosts = [
     summary: 'Zentra is a browser third-person arena shooter.',
     tags: ['Realtime', 'Game dev'],
     readingTime: null,
+    to: '/projects/zentra',
     part: 1,
   },
   {
@@ -22,7 +22,7 @@ const rawPosts = [
     summary: 'Server authority, lag compensation, capsule hit tests and race-free kills in Zentra.',
     tags: ['Realtime', 'Game dev'],
     readingTime: null,
-    slug: 'hits',
+    to: '/projects/zentra/hits',
     part: 2,
   },
   {
@@ -32,14 +32,10 @@ const rawPosts = [
     summary: 'Automated a weekly billing audit from 4–6 hours down to about 20 minutes.',
     tags: ['ERP', 'Business software'],
     readingTime: null,
+    to: '/projects/erp',
     part: 1,
   },
 ]
-
-export const postHref = (post) =>
-  post.slug ? `/projects/${post.project}/${post.slug}` : `/projects/${post.project}`
-
-export const posts = rawPosts.map((p) => ({ ...p, to: postHref(p) }))
 
 export const getProject = (key) => projects.find((p) => p.key === key)
 
@@ -47,4 +43,4 @@ export const postsFor = (projectKey) =>
   posts.filter((p) => p.project === projectKey).sort((a, b) => a.part - b.part)
 
 // The articles under a project, excluding the project's own report.
-export const articlesFor = (projectKey) => postsFor(projectKey).filter((p) => p.slug)
+export const articlesFor = (projectKey) => postsFor(projectKey).filter((p) => p.to !== `/projects/${projectKey}`)
