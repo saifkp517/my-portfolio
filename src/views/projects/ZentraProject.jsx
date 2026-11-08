@@ -3,10 +3,14 @@
 import CTAButton from '../../components/CTAButton.jsx'
 import ReportLayout, { ReportSection, ReportTable } from '../../components/report/ReportLayout.jsx'
 import { META_COLORS } from '../../data/iconColors.js'
+import Link from 'next/link'
+import ArrowOutIcon from '../../components/report/ArrowOutIcon.jsx'
 import ArticleList from '../../components/report/ArticleList.jsx'
 import { projects } from '../../data/projects.js'
+import { posts } from '../../data/posts.js'
 
 const ZENTRA = projects.find((p) => p.key === 'zentra')
+const HITS = posts.find((p) => p.key === 'zentra-hits-and-deaths')
 
 const PROPERTIES = [
   { label: 'Status', value: 'Discontinued pet project', color: META_COLORS.time, d: 'M8 2.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM8 5v3.2' },
@@ -29,7 +33,18 @@ const SECTIONS = [
 ]
 
 const STATE_ROWS = [
-  ['Hits and deaths', 'Server', 'Authoritative'],
+  [
+    <Link
+      key="hits"
+      href={HITS.to}
+      className="group inline-flex items-center gap-1.5 transition-colors hover:text-accent-400"
+    >
+      Hits and deaths
+      <ArrowOutIcon className="h-3.5 w-3.5" />
+    </Link>,
+    'Server',
+    'Authoritative',
+  ],
   ['Player position', 'Client', 'Reported every frame; the server stores and rebroadcasts it'],
   ['Current match', 'Redis', 'Current match only'],
   ['Lifetime kills, deaths, match counts', 'Postgres', 'Via TypeORM'],
