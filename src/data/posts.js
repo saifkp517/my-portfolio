@@ -1,9 +1,11 @@
 // Every post belongs to a project. A post's `project` is the key of an entry
-// in projects.js; `part` is its reading order inside that project. Both
-// write-ups are their project pages, so each post points there.
+// in projects.js; `part` is its reading order inside that project. A post's
+// URL is derived, never hand-written: the project's own report has no `slug`
+// and lives at /projects/<project>; any other article lives at
+// /projects/<project>/<slug>.
 import { projects } from './projects.js'
 
-export const posts = [
+const rawPosts = [
   {
     key: 'zentra',
     project: 'zentra',
@@ -11,7 +13,6 @@ export const posts = [
     summary: 'Zentra is a browser third-person arena shooter.',
     tags: ['Realtime', 'Game dev'],
     readingTime: null,
-    to: '/projects/zentra',
     part: 1,
   },
   {
@@ -21,7 +22,7 @@ export const posts = [
     summary: 'Server authority, lag compensation, capsule hit tests and race-free kills in Zentra.',
     tags: ['Realtime', 'Game dev'],
     readingTime: null,
-    to: '/projects/zentra/hits-and-deaths',
+    to: '/projects/zentra/hits',
     part: 2,
   },
   {
@@ -31,12 +32,19 @@ export const posts = [
     summary: 'Automated a weekly billing audit from 4–6 hours down to about 20 minutes.',
     tags: ['ERP', 'Business software'],
     readingTime: null,
-    to: '/projects/erp',
     part: 1,
   },
 ]
+
+export const postHref = (post) =>
+  post.slug ? `/projects/${post.project}/${post.slug}` : `/projects/${post.project}`
+
+export const posts = rawPosts.map((p) => ({ ...p, to: postHref(p) }))
 
 export const getProject = (key) => projects.find((p) => p.key === key)
 
 export const postsFor = (projectKey) =>
   posts.filter((p) => p.project === projectKey).sort((a, b) => a.part - b.part)
+
+// The articles under a project, excluding the project's own report.
+export const articlesFor = (projectKey) => postsFor(projectKey).filter((p) => p.slug)

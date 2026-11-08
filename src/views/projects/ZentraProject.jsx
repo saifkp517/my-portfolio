@@ -1,9 +1,9 @@
 'use client'
 
-import Link from 'next/link'
 import CTAButton from '../../components/CTAButton.jsx'
 import ReportLayout, { ReportSection, ReportTable } from '../../components/report/ReportLayout.jsx'
 import { META_COLORS } from '../../data/iconColors.js'
+import ArticleList from '../../components/report/ArticleList.jsx'
 import { projects } from '../../data/projects.js'
 
 const ZENTRA = projects.find((p) => p.key === 'zentra')
@@ -24,17 +24,12 @@ const SECTIONS = [
   { id: 'authority', label: 'Authority model' },
   { id: 'state', label: 'Where state lives' },
   { id: 'match', label: 'Match lifecycle' },
+  { id: 'articles', label: 'Articles' },
   { id: 'status', label: 'Status' },
 ]
 
 const STATE_ROWS = [
-  [
-    <Link key="hd" href="/projects/zentra/hits-and-deaths" className="underline decoration-white/30 underline-offset-4 transition-colors hover:text-white hover:decoration-white">
-      Hits and deaths →
-    </Link>,
-    'Server',
-    'Authoritative. Full walkthrough in the deep dive.',
-  ],
+  ['Hits and deaths', 'Server', 'Authoritative'],
   ['Player position', 'Client', 'Reported every frame; the server stores and rebroadcasts it'],
   ['Current match', 'Redis', 'Current match only'],
   ['Lifetime kills, deaths, match counts', 'Postgres', 'Via TypeORM'],
@@ -108,6 +103,10 @@ export default function ZentraProject() {
           A match lasts 10 minutes. A new room starts with five bots, and later players join the existing
           room, so a match is a rolling world rather than a fixed lobby.
         </p>
+      </ReportSection>
+
+      <ReportSection id="articles" title="Articles">
+        <ArticleList project="zentra" />
       </ReportSection>
 
       <ReportSection id="status" title="Status">
