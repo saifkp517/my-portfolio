@@ -25,7 +25,6 @@ const SECTIONS = [
   { id: 'kill', label: '6. Killing blow' },
   { id: 'respawn', label: '7. Respawn' },
   { id: 'shield', label: 'Shield ability' },
-  { id: 'bots', label: 'Bots' },
   { id: 'storage', label: 'Where it lives' },
   { id: 'takeaway', label: 'Takeaway' },
 ]
@@ -215,15 +214,6 @@ export default function ZentraHitsDeaths() {
           time each player’s cooldown ends, and refuses to activate the ability early, no matter what the
           browser asks for. A modified client can’t spam it.
         </p>
-      </ReportSection>
-
-      <ReportSection id="bots" title="Bots follow the same rules">
-        <p>
-          Every match is topped up with bots, so you’re never waiting in an empty lobby. The bots don’t get
-          special treatment. They take damage, die and respawn through exactly the same code path as human
-          players. They’re hit-tested the same way and blocked by the same trees.
-        </p>
-        <p>From your screen, a bot’s death looks identical to a player’s, because underneath it is identical.</p>
       </ReportSection>
 
       <ReportSection id="storage" title="Where everything lives">
