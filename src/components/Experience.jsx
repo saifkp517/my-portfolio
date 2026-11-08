@@ -5,7 +5,7 @@ import Reveal from './Reveal.jsx'
 const roles = [
   {
     company: 'Aithur',
-    initials: 'AI',
+    logo: '/images/logos/aithur.png',
     location: 'Australia',
     remote: true,
     role: 'Software Engineer',
@@ -24,7 +24,7 @@ const roles = [
   },
   {
     company: 'Automate Accounts',
-    initials: 'AA',
+    logo: '/images/logos/automateaccounts.svg',
     location: 'Mumbai, India',
     remote: false,
     role: 'Applications Developer (Zoho CRM Intern)',
@@ -64,9 +64,13 @@ function ExperienceRow({ item, defaultOpen }) {
     <div className="py-6">
       <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
         <div className="flex items-center gap-2.5">
-          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent-500/15 font-mono text-[9px] font-semibold text-accent-400">
-            {item.initials}
-          </span>
+          <img
+            src={item.logo}
+            alt=""
+            width={24}
+            height={24}
+            className="h-6 w-6 shrink-0 rounded-md bg-white/90 object-contain p-0.5"
+          />
           <h3 className="font-mono text-sm font-semibold text-white">{item.company}</h3>
         </div>
         <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-white/40">
