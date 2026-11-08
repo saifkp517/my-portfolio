@@ -27,7 +27,6 @@ const SECTIONS = [
   { id: 'shield', label: 'Shield ability' },
   { id: 'bots', label: 'Bots' },
   { id: 'storage', label: 'Where it lives' },
-  { id: 'next', label: 'What’s next' },
   { id: 'takeaway', label: 'Takeaway' },
 ]
 
@@ -239,24 +238,6 @@ export default function ZentraHitsDeaths() {
           </li>
         </List>
         <p>Match data is disposable and career stats are durable, and the two only meet once per match.</p>
-      </ReportSection>
-
-      <ReportSection id="next" title="What I’d build next">
-        <p>Every architecture has tradeoffs. These are the ones I’m working on next:</p>
-        <List>
-          <li>
-            <B>Server-side fire-rate limits.</B> Right now your browser limits how fast you can shoot. The next
-            step is enforcing it on the server too.
-          </li>
-          <li>
-            <B>Per-player lag compensation.</B> The rewind is a fixed amount today. Measuring each player’s
-            actual connection delay would make it more precise.
-          </li>
-          <li>
-            <B>Surviving restarts.</B> Match timers live in the server’s memory, so a restart mid-match loses
-            that match’s stats. Moving them to a persistent job queue fixes that.
-          </li>
-        </List>
       </ReportSection>
 
       <ReportSection id="takeaway" title="The takeaway">
