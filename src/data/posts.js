@@ -22,7 +22,7 @@ const rawPosts = [
     summary: 'Server authority, lag compensation, capsule hit tests and race-free kills in Zentra.',
     tags: ['Realtime', 'Game dev'],
     readingTime: null,
-    to: '/projects/zentra/hits',
+    slug: 'hits',
     part: 2,
   },
   {
