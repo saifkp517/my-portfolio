@@ -22,7 +22,6 @@ const SECTIONS = [
   { id: 'hit-test', label: '3. Hit test' },
   { id: 'occlusion', label: '4. Occlusion' },
   { id: 'damage', label: '5. Damage' },
-  { id: 'kill', label: '6. Killing blow' },
   { id: 'respawn', label: '7. Respawn' },
   { id: 'shield', label: 'Shield ability' },
   { id: 'storage', label: 'Where it lives' },
@@ -178,24 +177,6 @@ export default function ZentraHitsDeaths() {
           If a message is ever lost, the next hit puts their screen back in sync.
         </p>
         <p>The hit marker only appears when the server confirms the hit, so it doesn’t lie to you.</p>
-      </ReportSection>
-
-      <ReportSection id="kill" title="Step 6: The killing blow">
-        <p>When health reaches zero, the server has to record a kill. This is the trickiest moment in the whole flow.</p>
-        <p>
-          Imagine two players shoot the same target in the same instant, and both shots bring it to zero. Who
-          gets the kill? Does the target die twice?
-        </p>
-        <p>
-          The server solves this with an all-or-nothing step: check that the target is still alive, then mark
-          them dead, give the shooter one kill and give the target one death, all at once. If anything changed
-          in between, it starts over. The result is that every death has exactly one killer, with no double
-          kills and no lost kills.
-        </p>
-        <p>
-          Then everyone is told. The person killed gets a death screen and a kill cam that follows their
-          killer. Everyone in the match sees the kill feed update, the scoreboard change and a death animation.
-        </p>
       </ReportSection>
 
       <ReportSection id="respawn" title="Step 7: Respawn">
