@@ -82,3 +82,16 @@
 }
 .erp-metric { animation: erp-metric-arrive 700ms ease-out 400ms both; }
 @media (prefers-reduced-motion: reduce) { .erp-metric { animation: none; } }
+
+/* Marquee: ping-pong scroll for text that overflows its box (mobile). */
+@keyframes marquee-pingpong {
+  0%, 18% { transform: translateX(0); }
+  82%, 100% { transform: translateX(var(--marquee-dist)); }
+}
+.marquee-run {
+  animation: marquee-pingpong var(--marquee-dur, 8s) ease-in-out infinite alternate;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-box { overflow-x: auto; }
+  .marquee-run { animation: none; }
+}

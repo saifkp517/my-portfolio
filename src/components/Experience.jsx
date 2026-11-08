@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Marquee from './Marquee.jsx'
 import Chip from './Chip.jsx'
 import Reveal from './Reveal.jsx'
 
@@ -88,9 +89,9 @@ function ExperienceRow({ item, defaultOpen }) {
       >
         <div className="flex min-w-0 items-center gap-2">
           <CodeIcon />
-          <span className="truncate font-display text-sm font-semibold tracking-tight text-white sm:text-base">
+          <Marquee className="font-display text-sm font-semibold tracking-tight text-white sm:text-base">
             {item.role}
-          </span>
+          </Marquee>
         </div>
         <div className="flex shrink-0 items-center gap-2 font-mono text-[11px] text-white/40">
           <span className="hidden sm:inline">

@@ -1,3 +1,4 @@
+import Marquee from './Marquee.jsx'
 import MetaIconTile from './frame/MetaIconTile.jsx'
 
 // One cell of the hero-style meta grid: tinted icon tile, then mono text. An
@@ -11,7 +12,7 @@ export default function MetaRow({ icon, color, label, children, rightBorder }) {
     >
       <MetaIconTile color={color}>{icon}</MetaIconTile>
       {label && <span className="w-28 shrink-0 font-mono text-xs text-white/45">{label}</span>}
-      <span className="min-w-0 truncate font-mono text-sm text-white/75">{children}</span>
+      <Marquee className="font-mono text-sm text-white/75">{children}</Marquee>
     </div>
   )
 }

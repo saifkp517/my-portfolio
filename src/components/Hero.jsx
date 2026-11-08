@@ -4,6 +4,7 @@ import LocalClock from './LocalClock.jsx'
 import ObfuscatedPhone from './ObfuscatedPhone.jsx'
 import HeroCover from './HeroCover.jsx'
 import MetaRow from './MetaRow.jsx'
+import Marquee from './Marquee.jsx'
 import FullBleedRule from './frame/FullBleedRule.jsx'
 import { CORE_STACK } from '../data/coreStack.js'
 import { projects } from '../data/projects.js'
@@ -105,9 +106,9 @@ export default function Hero() {
               title="Open to opportunities"
             />
           </h1>
-          <p className="mt-1 truncate font-mono text-xs text-white/60">
+          <Marquee className="mt-1 font-mono text-xs text-white/60">
             I build real-time backends and the systems businesses run on.
-          </p>
+          </Marquee>
         </div>
       </div>
 
