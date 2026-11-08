@@ -117,8 +117,8 @@ export function ReportTable({ columns, rows }) {
           </tr>
         </thead>
         <tbody className="divide-y divide-line">
-          {rows.map(([head, ...cells]) => (
-            <tr key={head}>
+          {rows.map(([head, ...cells], r) => (
+            <tr key={r}>
               <th scope="row" className="py-3 pr-4 align-top font-normal text-white/75">
                 {head}
               </th>

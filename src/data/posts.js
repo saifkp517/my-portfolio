@@ -15,6 +15,16 @@ export const posts = [
     part: 1,
   },
   {
+    key: 'zentra-hits-and-deaths',
+    project: 'zentra',
+    title: 'What happens when you get shot: hit registration in a browser shooter',
+    summary: 'Server authority, lag compensation, capsule hit tests and race-free kills in Zentra.',
+    tags: ['Realtime', 'Game dev'],
+    readingTime: null,
+    to: '/projects/zentra/hits-and-deaths',
+    part: 2,
+  },
+  {
     key: 'erp',
     project: 'erp',
     title: 'From handwritten notebooks to a 20-minute weekly audit',

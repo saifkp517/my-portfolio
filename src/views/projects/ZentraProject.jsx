@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import CTAButton from '../../components/CTAButton.jsx'
 import ReportLayout, { ReportSection, ReportTable } from '../../components/report/ReportLayout.jsx'
 import { META_COLORS } from '../../data/iconColors.js'
@@ -27,7 +28,13 @@ const SECTIONS = [
 ]
 
 const STATE_ROWS = [
-  ['Hits and deaths', 'Server', 'Authoritative'],
+  [
+    <Link key="hd" href="/projects/zentra/hits-and-deaths" className="underline decoration-white/30 underline-offset-4 transition-colors hover:text-white hover:decoration-white">
+      Hits and deaths →
+    </Link>,
+    'Server',
+    'Authoritative. Full walkthrough in the deep dive.',
+  ],
   ['Player position', 'Client', 'Reported every frame; the server stores and rebroadcasts it'],
   ['Current match', 'Redis', 'Current match only'],
   ['Lifetime kills, deaths, match counts', 'Postgres', 'Via TypeORM'],
