@@ -8,7 +8,6 @@ export default {
   async redirects() {
     return [
       { source: '/articles/websockets', destination: '/projects/zentra', permanent: true },
-      { source: '/projects/zentra/hits', destination: '/projects/zentra/hits-and-deaths', permanent: false },
       { source: '/articles/redis', destination: '/projects/zentra', permanent: true },
     ]
   },
