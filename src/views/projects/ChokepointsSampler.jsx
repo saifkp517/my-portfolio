@@ -2,7 +2,7 @@
 
 import CTAButton from '../../components/CTAButton.jsx'
 import ReportLayout, { ReportSection, ReportTable } from '../../components/report/ReportLayout.jsx'
-import CoverPlaceholder from '../../components/report/CoverPlaceholder.jsx'
+import SamplerPipelineCover from '../../components/report/SamplerPipelineCover.jsx'
 import { B, Callout, Code, CodeBlock, H3, List, OrderedList } from '../../components/report/Prose.jsx'
 import { META_COLORS } from '../../data/iconColors.js'
 
@@ -189,7 +189,7 @@ Top 5 topics, ranked.
 export default function ChokepointsSampler() {
   return (
     <ReportLayout
-      cover={<CoverPlaceholder />}
+      cover={<SamplerPipelineCover />}
       eyebrow="Maritime choke points · Write-up 01"
       title="I wrote a clustering algorithm to ingest 10k+ news headlines, here’s how I did it and how each step works"
       subtitle="The sampler: embed → dedupe → cluster → split → rank → representatives → report."

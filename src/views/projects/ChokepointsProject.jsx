@@ -1,7 +1,7 @@
 'use client'
 
 import ReportLayout, { ReportSection } from '../../components/report/ReportLayout.jsx'
-import CoverPlaceholder from '../../components/report/CoverPlaceholder.jsx'
+import ChokepointsMap from '../../components/report/ChokepointsMap.jsx'
 import { B, List } from '../../components/report/Prose.jsx'
 import { META_COLORS } from '../../data/iconColors.js'
 import { posts } from '../../data/posts.js'
@@ -77,7 +77,7 @@ function Pipeline() {
 export default function ChokepointsProject() {
   return (
     <ReportLayout
-      cover={<CoverPlaceholder />}
+      cover={<ChokepointsMap />}
       eyebrow="Project report · In progress"
       title="Maritime choke points"
       status="In progress"

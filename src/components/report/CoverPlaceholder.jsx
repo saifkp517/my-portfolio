@@ -1,11 +1,11 @@
 // Stand-in for a project with no cover image yet. A faint ruled grid in the
 // site's hairline colour, clearly labelled as a placeholder.
-export default function CoverPlaceholder({ className = 'aspect-[21/9]' }) {
+export default function CoverPlaceholder({ className = 'relative aspect-[21/9]' }) {
   return (
     <div
       role="img"
       aria-label="Cover image placeholder"
-      className={`relative flex items-center justify-center overflow-hidden bg-ink ${className}`}
+      className={`flex items-center justify-center overflow-hidden bg-ink ${className}`}
       style={{
         backgroundImage:
           'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',

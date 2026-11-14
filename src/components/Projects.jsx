@@ -4,6 +4,10 @@ import Reveal from './Reveal.jsx'
 import FullBleedRule from './frame/FullBleedRule.jsx'
 import MetaIconTile from './frame/MetaIconTile.jsx'
 import CoverPlaceholder from './report/CoverPlaceholder.jsx'
+import ChokepointsMap from './report/ChokepointsMap.jsx'
+
+// Drawn (SVG) covers, keyed by projects.js `coverArt`.
+const COVER_ART = { 'chokepoints-map': ChokepointsMap }
 import { projects } from '../data/projects.js'
 
 // One section for projects and their writing, built like the hero: a header
@@ -35,6 +39,11 @@ function ProjectMedia({ item }) {
     >
       {item.cover ? (
         <img src={item.cover} alt="" className="absolute inset-0 h-full w-full object-cover" />
+      ) : COVER_ART[item.coverArt] ? (
+        (() => {
+          const Art = COVER_ART[item.coverArt]
+          return <Art className="absolute inset-0" />
+        })()
       ) : (
         <CoverPlaceholder className="absolute inset-0" />
       )}
@@ -109,7 +118,16 @@ export default function Projects() {
                   </div>
                   <p className="mt-2.5 font-mono text-xs leading-relaxed text-white/60">{item.tagline}</p>
                   <div className="mt-3 flex flex-wrap gap-1.5">
-                    {item.status && <Chip strong>{item.status}</Chip>}
+                    {item.status && (
+                      <Chip strong>
+                        {/* Pinging dot: this project is still being built. */}
+                        <span className="relative mr-1.5 flex h-1.5 w-1.5" aria-hidden="true">
+                          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-400 opacity-75 motion-reduce:hidden" />
+                          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent-400" />
+                        </span>
+                        {item.status}
+                      </Chip>
+                    )}
                     {item.tags.map((t) => (
                       <Chip key={t}>{t}</Chip>
                     ))}
