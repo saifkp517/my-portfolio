@@ -3,6 +3,7 @@ import Chip from './Chip.jsx'
 import Reveal from './Reveal.jsx'
 import FullBleedRule from './frame/FullBleedRule.jsx'
 import MetaIconTile from './frame/MetaIconTile.jsx'
+import CoverPlaceholder from './report/CoverPlaceholder.jsx'
 import { projects } from '../data/projects.js'
 
 // One section for projects and their writing, built like the hero: a header
@@ -32,7 +33,11 @@ function ProjectMedia({ item }) {
       aria-label={item.title}
       className="relative block aspect-[2/1] overflow-hidden border-b border-line bg-ink transition-opacity duration-200 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-500"
     >
-      <img src={item.cover} alt="" className="absolute inset-0 h-full w-full object-cover" />
+      {item.cover ? (
+        <img src={item.cover} alt="" className="absolute inset-0 h-full w-full object-cover" />
+      ) : (
+        <CoverPlaceholder className="absolute inset-0" />
+      )}
       {item.video && (
         <video
           autoPlay
@@ -75,7 +80,11 @@ export default function Projects() {
             <Reveal
               key={item.key}
               delay={i * 70}
-              className="flex border-b border-line last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0"
+              // From md up, cells sit two per row: left cells get a right rule,
+              // and every row but the last gets a bottom rule.
+              className={`flex border-b border-line last:border-b-0 ${
+                i % 2 === 0 ? 'md:border-r' : ''
+              } ${i >= projects.length - (projects.length % 2 || 2) ? 'md:border-b-0' : 'md:border-b'}`}
             >
               <article className="flex w-full min-w-0 flex-col">
                 <ProjectMedia item={item} />
@@ -100,6 +109,7 @@ export default function Projects() {
                   </div>
                   <p className="mt-2.5 font-mono text-xs leading-relaxed text-white/60">{item.tagline}</p>
                   <div className="mt-3 flex flex-wrap gap-1.5">
+                    {item.status && <Chip strong>{item.status}</Chip>}
                     {item.tags.map((t) => (
                       <Chip key={t}>{t}</Chip>
                     ))}

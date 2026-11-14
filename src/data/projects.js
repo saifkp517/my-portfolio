@@ -25,4 +25,17 @@ export const projects = [
     cover: '/images/watchman-billing.png',
     to: '/projects/erp',
   },
+  {
+    key: 'chokepoints',
+    title: 'Maritime choke points',
+    label: 'Choke points',
+    color: PROJECT_COLORS.chokepoints,
+    status: 'In progress',
+    tagline: 'In progress: studying how news, social media and shipping data around maritime choke points relate.',
+    tags: ['Python', 'Embeddings', 'GDELT', 'AIS'],
+    // Placeholder: no cover image yet. Cards and the project page draw a
+    // labelled placeholder when `cover` is null.
+    cover: null,
+    to: '/projects/chokepoints',
+  },
 ]

@@ -35,6 +35,26 @@ export const posts = [
     to: '/projects/erp',
     part: 1,
   },
+  {
+    key: 'chokepoints',
+    project: 'chokepoints',
+    title: 'Maritime choke points: project overview',
+    summary: 'In progress: how news, social media and shipping data around maritime choke points relate.',
+    tags: ['Data', 'In progress'],
+    readingTime: null,
+    to: '/projects/chokepoints',
+    part: 1,
+  },
+  {
+    key: 'chokepoints-sampler',
+    project: 'chokepoints',
+    title: "I wrote a clustering algorithm to ingest 10k+ news headlines, here's how I did it and how each step works",
+    summary: 'Embed, dedupe, cluster, split, rank, pick representatives and write a report, on a laptop CPU with no LLM calls.',
+    tags: ['Data', 'NLP'],
+    readingTime: null,
+    to: '/projects/chokepoints/sampler',
+    part: 2,
+  },
 ]
 
 export const getProject = (key) => projects.find((p) => p.key === key)

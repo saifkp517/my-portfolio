@@ -15,6 +15,7 @@ export const META_COLORS = {
 export const PROJECT_COLORS = {
   zentra: '#36CE9E', // accent.500
   erp: '#38BDF8', // meta.sky
+  chokepoints: '#FBBF24', // meta.amber
 }
 
 export const SOCIAL_COLORS = {
